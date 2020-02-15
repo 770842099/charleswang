@@ -66,7 +66,6 @@ void Tree_Solution::midTraverse(TreeNode *root)
 	if (root == NULL)
 		return;
 	midTraverse(root->left);
-
 	cout << root->val << " ";
 	midTraverse(root->right);
 }
@@ -138,6 +137,44 @@ vector<int> Tree_Solution::NLConstruction()
 	for (auto&i : ans)
 		cout << i << endl;
 	return ans;
+}
+
+void Tree_Solution::priorMidRecreation()
+{
+	string middle = "12345678";
+	string first = "42136578";
+	unordered_map<char, int> map;
+	for (int i = 0; i < middle.size(); i++)
+	{
+		map.insert(make_pair(middle[i], i));
+	}
+	TreeNode *root = priorMidRecreationDetail(middle, first, map);
+	midTraverse(root);
+}
+
+TreeNode* Tree_Solution::priorMidRecreationDetail(string middle, string first, unordered_map<char, int> map)
+{
+	if (middle.length() == 0)
+		return NULL;
+	if (middle.length() == 1)
+		return new TreeNode(first[0]-'0');
+
+	TreeNode* root = new TreeNode(first[0]-'0');
+	string middle_left;
+	string middle_right;
+	string first_left;
+	string first_right;
+
+		int index = middle.find(first[0]);
+		middle_left = middle.substr(0, index);
+		middle_right = middle.substr(index + 1, middle.size()-1);
+
+		first_left = first.substr(1, index);
+		first_right = first.substr(index + 1, first.size() - 1);
+
+		root->left = priorMidRecreationDetail(middle_left, first_left, map);
+		root->right = priorMidRecreationDetail(middle_right, middle_right, map);
+	return root;
 }
 
 

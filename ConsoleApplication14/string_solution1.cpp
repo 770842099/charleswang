@@ -7,7 +7,8 @@ void string_solution::run()
 	//two_same_strings();
 
 	//test_function();
-	yixuci();
+	//yixuci();
+	shortestContainingSubLength();
 }
 
 
@@ -95,6 +96,74 @@ void string_solution::yixuci()
 			cout << s << " ";
 		cout << endl;
 	}
+}
+
+void  string_solution::shortestContainingSubLength()
+{
+	string s = "ADOBECODEBANC", t = "ABC";
+
+	int ans = INT_MAX;
+	int needCalculated[26] = { 0 };
+	int tNumbers[26] = { 0 };
+	int coverredChars = 0;
+	for (int i = 0; i < t.length(); i++)
+	{
+		needCalculated[t[i] - 'A'] = 1;
+	}
+
+	int endPos = 0;
+	int startPos = 0;
+
+	while (true)
+	{
+		for (; endPos < s.length(); endPos++)
+		{
+			if (!needCalculated[s[endPos]-'A'])
+				continue;
+
+			if (tNumbers[s[endPos]-'A']>0)
+			{
+				tNumbers[s[endPos] - 'A']++;
+			}
+			else
+			{
+				coverredChars++;
+				tNumbers[s[endPos] - 'A'] = 1;
+				if (coverredChars == t.length())
+				{
+					ans = min(ans, endPos - startPos + 1);
+					break;
+				}
+			}
+		}
+		if (endPos == s.length())
+			break;
+
+		bool stopAfterNoCalculated = false;
+		for (; startPos < endPos; startPos++)
+		{
+			if (!needCalculated[s[startPos]-'A'])
+				continue;
+			
+			if (stopAfterNoCalculated)
+				break;
+			if (tNumbers[s[startPos] - 'A'] > 1)
+			{
+				tNumbers[s[startPos] - 'A']--;
+			}
+			else
+			{
+				tNumbers[s[startPos] - 'A'] = 0;
+				coverredChars--;
+				if (coverredChars < t.length())
+				{
+					endPos++;
+					stopAfterNoCalculated = true;
+				}
+			}
+		}
+	}
+	cout << ans;
 }
 
 

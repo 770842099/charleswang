@@ -11,5 +11,6 @@ public:
 
 	void test_function();
 	void yixuci();
+	void shortestContainingSubLength();
 };
 

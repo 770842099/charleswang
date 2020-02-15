@@ -14,6 +14,7 @@
 #include "DP_Solution.h"
 #include "Puzzle_Solution.h"
 #include "DFS_Solution.h"
+#include "Bit_Solution.h"
 using namespace std;
 
 void print_priority_queue(priority_queue<int>& q)
@@ -336,11 +337,12 @@ int main()
 
 	//test_sort();
 
-	string_solution s_solution;
-	s_solution.run();
+	//string_solution s_solution;
+	//s_solution.run();
 
-	//Tree_Solution s;
-	//s.midTraverse(s.init())
+	Tree_Solution s;
+	//s.midTraverse(s.init());
+	s.priorMidRecreation();
 	//s.NLConstruction();
 
 	//GraphSolution s;
@@ -363,6 +365,9 @@ int main()
 
 	//DFS_Solution dfs;
 	//dfs.test();
+
+	//Bit_Solution s;
+	//s.test();
 }
 
 

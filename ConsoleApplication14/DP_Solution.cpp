@@ -102,7 +102,6 @@ void DP_Solution::shortestSubStringSequence()
 	cout << same[a.size()][b.size()].c_str() << endl;
 }
 
-
 void DP_Solution::bag01()
 {
 	int candidates[7] = { 10, 1, 2, 7, 6, 1, 5 };

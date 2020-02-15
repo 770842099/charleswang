@@ -57,6 +57,9 @@
     <ClCompile Include="linked_list.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="Bit_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tree_Solution.h">
@@ -84,6 +87,9 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="Greedy_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Bit_Solution.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

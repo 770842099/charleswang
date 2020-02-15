@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bit_Solution.cpp" />
     <ClCompile Include="ConsoleApplication14.cpp" />
     <ClCompile Include="DFS_Solution.cpp" />
     <ClCompile Include="DP_Solution.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="Tree_Solution.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bit_Solution.h" />
     <ClInclude Include="DFS_Solution.h" />
     <ClInclude Include="DP_Solution.h" />
     <ClInclude Include="Graph.h" />

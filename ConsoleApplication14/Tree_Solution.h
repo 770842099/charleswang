@@ -1,6 +1,7 @@
 #pragma once
 #include <cstddef>
 #include <vector>
+#include "LibInclude.h"
 using namespace std;
 struct TreeNode {
 	int val;
@@ -31,4 +32,7 @@ public:
 	void midTraverse(TreeNode *root);
 
 	vector<int> NLConstruction();
+
+	void priorMidRecreation();
+	TreeNode* priorMidRecreationDetail(string middle, string first, unordered_map<char, int> map);
 };
