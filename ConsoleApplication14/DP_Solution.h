@@ -8,5 +8,6 @@ public:
 	//boat carry car across sea,  http://poj.org/problem?id=2336
 	void boatCarryCarAccrossRiver();
 	void shortestSubStringSequence();
+	void bag01();
 };
 

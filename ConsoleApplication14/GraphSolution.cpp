@@ -194,8 +194,6 @@ void GraphSolution::shortestPath()
 				if (g.adj[start][node] + g.adj[node][i] < g.adj[start][i])
 				{
 					g.adj[start][i] = g.adj[start][node] + g.adj[node][i];
-
-					cout << "length:" << g.adj[start][i] << " i:" << i << endl;
 					q1.push(i);
 				}
 			}

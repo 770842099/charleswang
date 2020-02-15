@@ -10,5 +10,6 @@ public:
 	void check_two_strings(string s1, string s2, int& ans);
 
 	void test_function();
+	void yixuci();
 };
 

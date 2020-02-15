@@ -336,15 +336,15 @@ int main()
 
 	//test_sort();
 
-	//string_solution s_solution;
-	//s_solution.run();
+	string_solution s_solution;
+	s_solution.run();
 
 	//Tree_Solution s;
 	//s.midTraverse(s.init())
 	//s.NLConstruction();
 
-	GraphSolution s;
-	s.test();
+	//GraphSolution s;
+	//s.test();
 
 	//Greedy_Solution s;
 	//s.multipleLinksSort();

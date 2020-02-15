@@ -6,7 +6,8 @@ void string_solution::run()
 {
 	//two_same_strings();
 
-	test_function();
+	//test_function();
+	yixuci();
 }
 
 
@@ -67,4 +68,34 @@ void string_solution::test_function()
 	a1= LibHelper::replace_string(a1, "abc", "e");
 	cout << a1<<endl;
 }
+
+void string_solution::yixuci()
+{
+	unordered_map<string, vector<string>> m;
+	string s[] = { "eat", "tea", "tan", "ate", "nat", "bat" };
+	int l = sizeof(s)/sizeof(s[0]);
+	for (int i = 0; i<l; i++)
+	{
+		string temp = s[i];
+		sort(temp.begin(), temp.end());
+		if (m.count(temp))
+		{
+			m[temp].push_back(s[i]);
+		}
+		else
+		{
+			vector<string> tv{s[i]};
+			m.insert(make_pair(temp, tv));
+		}
+	}
+
+	for (pair<string, vector<string>> p : m)
+	{
+		for (string s : p.second)
+			cout << s << " ";
+		cout << endl;
+	}
+}
+
+
 
