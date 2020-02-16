@@ -1,17 +1,14 @@
 #include "Tree_Solution.h"
-#include <cstddef>
-#include <unordered_set>
-#include <unordered_map>
-#include <iostream>
-#include <queue>
-#include <stack>
+#include "LibInclude.h"
 
-using namespace std;
-
-TreeNode* Tree_Solution::init()
+void Tree_Solution::test()
 {
-	TreeValue values[] = { {2,1,3},{4,2,6},{6,5,7},{7,NULL,8} };
-	int length = sizeof(values) / sizeof(values[0]);
+	commonAncestor();
+}
+
+TreeNode* Tree_Solution::Create(vector<TreeValue> values)
+{
+	int length = (int)values.size();
 	unordered_set<int> rootvalue;
 	for (int i = 0; i < length; i++)
 	{
@@ -23,7 +20,7 @@ TreeNode* Tree_Solution::init()
 		rootvalue.erase(values[i].left);
 		rootvalue.erase(values[i].right);
 	}
-	cout << *rootvalue.begin();
+	//cout << *rootvalue.begin();
 
 	unordered_map<int, pair<int, int>> parentchild;
 
@@ -59,6 +56,13 @@ TreeNode* Tree_Solution::init()
 	};
 
 	return noderoot;
+}
+
+
+TreeNode* Tree_Solution::init()
+{
+	vector<TreeValue> values = { {2,1,3},{4,2,6},{6,5,7},{7,NULL,8} };
+	return Create(values);
 }
 
 void Tree_Solution::midTraverse(TreeNode *root)
@@ -165,7 +169,7 @@ TreeNode* Tree_Solution::priorMidRecreationDetail(string middle, string first, u
 	string first_left;
 	string first_right;
 
-		int index = middle.find(first[0]);
+		int index = (int)middle.find(first[0]);
 		middle_left = middle.substr(0, index);
 		middle_right = middle.substr(index + 1, middle.size()-1);
 
@@ -176,6 +180,44 @@ TreeNode* Tree_Solution::priorMidRecreationDetail(string middle, string first, u
 		root->right = priorMidRecreationDetail(middle_right, middle_right, map);
 	return root;
 }
+
+void Tree_Solution::commonAncestor()
+{
+	vector<TreeValue> para1 = { {3,5,1}, {5,6,2},{2,7,4},{1,0,8} };
+	TreeNode* tree1 = Create(para1);
+	vector<int> parents, s1, s2;
+	commonAncestorDetails(tree1, parents, s1, 5, s2, 8);
+	unordered_set<int> s;
+	for (int i = s1.size() - 1; i >= 0; i--)
+	{
+		s.insert(s1[i]);
+	}
+
+	for (int i = s2.size() - 1; i >= 0; i--)
+	{
+		if (s.count(s2[i]) > 0)
+		{
+			cout << s2[i] << endl;
+			return;
+		}
+	}
+}
+
+void Tree_Solution::commonAncestorDetails(TreeNode* t,vector<int> parents, vector<int>& s1, int v1, vector<int>& s2, int v2)
+{
+	if (t == NULL)
+		return;
+	
+	if (t->val == v1)
+		s1 = parents;
+	if (t->val == v2)
+		s2 = parents;
+	parents.push_back(t->val);
+	commonAncestorDetails(t->left, parents, s1, v1, s2, v2);
+	commonAncestorDetails(t->right, parents, s1, v1, s2, v2);
+}
+
+
 
 
 

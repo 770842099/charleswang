@@ -15,6 +15,7 @@
 #include <cassert>
 #include <queue>
 #include "linked_list.h"
+#include "TrieTree.h"
 //#include <list>
 using namespace std;
 
@@ -45,6 +46,21 @@ public:
 		return subject;
 	}
 };
+
+struct Trible
+{
+	int first;
+	int second;
+	int three;
+
+	Trible(int _first, int _second, int _three)
+	{
+		first = _first;
+		second = _second;
+		three = _three;
+	}
+};
+
 
 
 

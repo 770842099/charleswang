@@ -9,5 +9,8 @@ public:
 
 	void hannuoTa();
 	void hannuoTaDetail(char start, char b, char s[], int length, int n);
+
+	//leetcode 243
+	void allCalculationByBrace();
 };
 

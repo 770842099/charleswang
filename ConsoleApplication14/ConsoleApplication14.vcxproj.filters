@@ -30,9 +30,6 @@
     <ClCompile Include="GraphSolution.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="string_solution1.h">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Graph.cpp">
       <Filter>Util</Filter>
     </ClCompile>
@@ -51,46 +48,61 @@
     <ClCompile Include="DFS_Solution.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="linked_list.h">
-      <Filter>Util</Filter>
-    </ClCompile>
     <ClCompile Include="linked_list.cpp">
       <Filter>Util</Filter>
     </ClCompile>
     <ClCompile Include="Bit_Solution.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TrieTree.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Array_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="linked_list.h">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="string_solution1.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tree_Solution.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphSolution.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="TrieTree.h">
+      <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="Graph.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="Recursive_Solution.h">
+    <ClInclude Include="Array_Solution.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="LibInclude.h">
-      <Filter>Util</Filter>
-    </ClInclude>
-    <ClInclude Include="DP_Solution.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Puzzle_Solution.h">
+    <ClInclude Include="Bit_Solution.h">
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="DFS_Solution.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="DP_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphSolution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
     <ClInclude Include="Greedy_Solution.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="Bit_Solution.h">
+    <ClInclude Include="Puzzle_Solution.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Recursive_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LibInclude.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

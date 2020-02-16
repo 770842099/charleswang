@@ -3,7 +3,8 @@
 void Puzzle_Solution::test()
 {
 	//cal24();
-	hannuoTa();
+	//hannuoTa();
+	allCalculationByBrace();
 }
 
 void Puzzle_Solution::cal24()
@@ -47,8 +48,8 @@ void Puzzle_Solution::calcDetail(float a[], int num, string s[])
 					break;
 				case 2:
 					calculated = a[j] - a[j];
-					scalc = LibHelper::string_sprintf("(%s-%s)", s[j].c_str(), s[i].c_str());
-					break;
+scalc = LibHelper::string_sprintf("(%s-%s)", s[j].c_str(), s[i].c_str());
+break;
 				case 3:
 					calculated = a[i] * a[j];
 					scalc = LibHelper::string_sprintf("(%s*%s)", s[i].c_str(), s[j].c_str());
@@ -108,9 +109,71 @@ void Puzzle_Solution::hannuoTaDetail(char start, char end, char s[], int length,
 	set.erase(end);
 	char extra = *set.begin();
 
-    hannuoTaDetail(start, extra, s, length, n - 1);
+	hannuoTaDetail(start, extra, s, length, n - 1);
 	cout << n << " from " << start << " to " << end << endl;
 	hannuoTaDetail(extra, end, s, length, n - 1);
+}
+
+void Puzzle_Solution::allCalculationByBrace()
+{
+	string s = "2*3-4*5";
+	vector<int> v;
+	vector<char> calc;
+	vector<int> dp[10][10];
+	int cur = 0;
+	for (int i = 0; i < s.size(); i++)
+	{
+		if (s[i] == '*' || s[i] == '-' || s[i] == '+')
+		{
+			v.push_back(cur);
+			cur = 0;
+			calc.push_back(s[i]);
+		}
+		else
+		{
+			cur = cur * 10 + (s[i] - '0');
+		}
+	}
+	v.push_back(cur);
+
+	int nums = v.size();
+	for (int i = 0; i < nums; i++)
+	{
+		dp[i][i].push_back(v[i]);
+	}
+
+	for (int l = 2; l <= nums; l++)
+	{
+		for (int i = 0; i < nums - l + 1; i++)
+		{
+			for (int j = 0; j < l-1; j++)
+			{
+				for (int first : dp[i][i + j])
+				{
+					for (int second : dp[i + j + 1][i + l - 1])
+					{
+						switch (calc[i+j])
+						{
+						case '+':
+							dp[i][i + l - 1].push_back(first + second);
+							break;
+						case '-':
+							dp[i][i + l - 1].push_back(first - second);
+							break;
+						case '*':
+							dp[i][i + l - 1].push_back(first * second);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	for (int result : dp[0][0 + v.size()-1])
+	{
+		cout << result << endl;
+	}
+
 }
 
 

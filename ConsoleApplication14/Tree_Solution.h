@@ -28,6 +28,7 @@ struct TreeValue {
 class Tree_Solution
 {
 public:
+	void test();
 	TreeNode* init();
 	void midTraverse(TreeNode *root);
 
@@ -35,4 +36,8 @@ public:
 
 	void priorMidRecreation();
 	TreeNode* priorMidRecreationDetail(string middle, string first, unordered_map<char, int> map);
+
+	void commonAncestor();
+	TreeNode* Create(vector<TreeValue> values);
+    void commonAncestorDetails(TreeNode* t, vector<int> parents, vector<int>& s1, int v1, vector<int>& s2, int v2);
 };

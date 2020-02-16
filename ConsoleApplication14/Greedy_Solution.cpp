@@ -1,5 +1,6 @@
 #include "Greedy_Solution.h"
-
+#include "LibInclude.h"
+#include "linked_list.h"
 
 void Greedy_Solution::testcmp()
 {

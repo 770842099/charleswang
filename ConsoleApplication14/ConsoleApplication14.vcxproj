@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Array_Solution.cpp" />
     <ClCompile Include="Bit_Solution.cpp" />
     <ClCompile Include="ConsoleApplication14.cpp" />
     <ClCompile Include="DFS_Solution.cpp" />
@@ -165,8 +166,10 @@
     <ClCompile Include="string_solution1.cpp" />
     <ClCompile Include="string_solution1.h" />
     <ClCompile Include="Tree_Solution.cpp" />
+    <ClCompile Include="TrieTree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Array_Solution.h" />
     <ClInclude Include="Bit_Solution.h" />
     <ClInclude Include="DFS_Solution.h" />
     <ClInclude Include="DP_Solution.h" />
@@ -177,6 +180,7 @@
     <ClInclude Include="Puzzle_Solution.h" />
     <ClInclude Include="Recursive_Solution.h" />
     <ClInclude Include="Tree_Solution.h" />
+    <ClInclude Include="TrieTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
