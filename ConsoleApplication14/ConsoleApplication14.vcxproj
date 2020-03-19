@@ -161,8 +161,11 @@
     <ClCompile Include="Greedy_Solution.cpp" />
     <ClCompile Include="linked_list.cpp" />
     <ClCompile Include="linked_list.h" />
+    <ClCompile Include="Number_Solution.cpp" />
     <ClCompile Include="Puzzle_Solution.cpp" />
     <ClCompile Include="Recursive_Solution.cpp" />
+    <ClCompile Include="Schedule_Solution.cpp" />
+    <ClCompile Include="Stradegy_Solution.cpp" />
     <ClCompile Include="string_solution1.cpp" />
     <ClCompile Include="string_solution1.h" />
     <ClCompile Include="Tree_Solution.cpp" />
@@ -177,8 +180,11 @@
     <ClInclude Include="GraphSolution.h" />
     <ClInclude Include="Greedy_Solution.h" />
     <ClInclude Include="LibInclude.h" />
+    <ClInclude Include="Number_Solution.h" />
     <ClInclude Include="Puzzle_Solution.h" />
     <ClInclude Include="Recursive_Solution.h" />
+    <ClInclude Include="Schedule_Solution.h" />
+    <ClInclude Include="Stradegy_Solution.h" />
     <ClInclude Include="Tree_Solution.h" />
     <ClInclude Include="TrieTree.h" />
   </ItemGroup>

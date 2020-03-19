@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
-#include <iostream>
+
+#include "LibInclude.h"
 using namespace std;
 class string_solution
 {
@@ -12,5 +12,8 @@ public:
 	void test_function();
 	void yixuci();
 	void shortestContainingSubLength();
+
+	void leetCode267_CurcleString();
+	void leetCode267_CurcleStringDetail(string s, vector<int> chars, char* characters);
 };
 

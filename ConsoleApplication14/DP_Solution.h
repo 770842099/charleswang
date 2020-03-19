@@ -9,5 +9,11 @@ public:
 	void boatCarryCarAccrossRiver();
 	void shortestSubStringSequence();
 	void bag01();
+
+
+
+	//leetcode 600
+	void bitDP();
+	int bitDPDetails(int pos, int pre, bool limit, vector<int> bit, int dp[][2]);
 };
 

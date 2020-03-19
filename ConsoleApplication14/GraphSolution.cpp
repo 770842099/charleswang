@@ -183,6 +183,9 @@ void GraphSolution::shortestPath()
 	{
 		q = q1;
 		q1 = queue<int>();
+
+		unordered_set<int> sets;
+
 		while (!q.empty())
 		{
 			int node = q.front();
@@ -194,7 +197,11 @@ void GraphSolution::shortestPath()
 				if (g.adj[start][node] + g.adj[node][i] < g.adj[start][i])
 				{
 					g.adj[start][i] = g.adj[start][node] + g.adj[node][i];
-					q1.push(i);
+					if (sets.count(i) == 0)
+					{
+						q1.push(i);
+						sets.emplace(i);
+					}
 				}
 			}
 		};

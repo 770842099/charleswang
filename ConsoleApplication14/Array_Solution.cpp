@@ -3,7 +3,13 @@
 void Array_Solution::test()
 {
 	//kthLargerNumberStack();
-	slibingMaxValue();
+	//slibingMaxValue();
+	//MaxIncreasedSequence();
+
+	//binarySearchEqual();
+	//binarySearchBiggerEqual();
+	binarySearchBigger();
+
 }
 
 void Array_Solution::kthLargerNumber()
@@ -91,4 +97,124 @@ void Array_Solution::slibingMaxValue()
 		if (s.front().second == i - k + 1)
 			s.pop_front();
 	}
+}
+
+void  Array_Solution::MaxIncreasedSequence()
+{
+	vector<int> n = { 10, 9, 2, 5, 3, 7, 101, 18 };
+	vector<int> sequence;
+	for (int i = 0; i < n.size(); i++)
+	{
+		int k=lower_bound(sequence.begin(), sequence.end(), n[i])-sequence.begin();
+		if (k == sequence.size())
+			sequence.push_back(n[i]);
+		else
+		{
+			sequence[k] = n[i];
+		}
+	}
+	for (int i : sequence)
+	{
+		cout << i << " " << endl;
+	}
+}
+
+void Array_Solution::binarySearchEqual()
+{
+	vector<int> v = { 1, 3, -1, -3, 5, 3, 6, 7 };
+	int begin = 0;
+	int end = v.size() - 1;
+	int result = 6;
+	sort(v.begin(), v.end());
+	while (begin <= end)
+	{
+		int middle = (begin + end) / 2;
+		if (v[middle] == result)
+		{
+			cout << middle;
+			break;
+		}
+		else if (v[middle] < result)
+		{
+			begin = middle + 1;
+		}
+		else
+		{
+			end = middle - 1;
+		}
+	}
+	cout << false;
+}
+
+void Array_Solution::binarySearchBiggerEqual()
+{
+	vector<int> v = { 1, 2, 7, 9, 10, 20, 23, 25, 28, 30, 32, 35, 40, 100};
+	int begin = 0;
+	int end = v.size() - 1;
+	int result = 10;
+	sort(v.begin(), v.end());
+	while (begin <= end)
+	{
+		int middle = (begin + end) / 2;
+		if (v[middle] == result)
+		{
+			cout << middle;
+			return;
+		}
+		else if (v[middle] < result)
+		{
+			begin = middle + 1;
+		}
+		else
+		{
+			end = middle - 1;
+		}
+	}
+	cout << begin;
+}
+
+void Array_Solution::binarySearchBigger()
+{
+	vector<int> v = { 1, 2, 7, 9, 10, 20, 23, 25, 28, 30, 32, 35, 40, 100 };
+	int begin = 0;
+	int end = v.size() - 1;
+	int result = 2;
+	sort(v.begin(), v.end());
+	while (begin <= end)
+	{
+		int middle = (begin + end) / 2;
+
+		if (v[middle] <= result)
+		{
+			begin = middle + 1;
+		}
+		else
+		{
+			end = middle - 1;
+		}
+	}
+	cout << begin;
+}
+
+
+int Array_Solution::bestRotation(vector<int>& A) {
+	int N = A.size();
+	vector<int> mark(N, 0);
+	for (int i = 0; i < N; ++i) {
+		int k_in = (i + 1) % N; // 得分区间入口
+		int k_out = (N + i + 1 - A[i]) % N; // 得分区间出口
+		++mark[k_in];
+		--mark[k_out];
+	}
+	int res = 0;
+	int score = 0;
+	int max_score = INT_MIN;
+	for (int i = 0; i < N; ++i) {
+		score += mark[i]; // 寻找最大累计和，也就是最大重合区间数目
+		if (score > max_score) {
+			res = i;
+			max_score = score;
+		}
+	}
+	return res;
 }

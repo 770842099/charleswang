@@ -22,8 +22,6 @@ public:
 		this->last = NULL;
 	}
 	~LinkedList() {};
-	void add(int data);
-	void addLast(int data);
 	void print() {
 		LinkedListNode* head = this->head;
 		int i = 1;
@@ -34,44 +32,33 @@ public:
 			i++;
 		}
 	}
+
+	void add(int data) {
+		LinkedListNode* node = new LinkedListNode();
+		node->data = data;
+		node->next = this->head;
+
+		this->head = node;
+		this->length++;
+		if (length == 1)
+			last = node;
+	}
+
+	void addLast(int data) {
+		LinkedListNode* node = new LinkedListNode();
+		node->data = data;
+		node->next = NULL;
+		this->length++;
+
+		if (length == 1)
+		{
+			last = node;
+			head = node;
+		}
+		else
+		{
+			this->last->next = node;
+			this->last = node;
+		}
+	}
 };
-
-//LinkedList::LinkedList() {
-//	this->length = 0;
-//	this->head = NULL;
-//}
-
-//LinkedList::~LinkedList() {
-//	//std::cout << "LIST DELETED";
-//}
-//
-//void LinkedList::add(int data) {
-//	LinkedListNode* node = new LinkedListNode();
-//	node->data = data;
-//	node->next = this->head;
-//	this->head = node;
-//	this->length++;
-//}
-//
-//void LinkedList::print() {
-//	LinkedListNode* head = this->head;
-//	int i = 1;
-//	while (head) {
-//		std::cout << i << ": " << head->data << std::endl;
-//		head = head->next;
-//		i++;
-//	}
-//}
-
-//int main(int argc, char const *argv[])
-//{
-//	LinkedList* list = new LinkedList();
-//	for (int i = 0; i < 100; ++i)
-//	{
-//		list->add(rand() % 100);
-//	}
-//	list->print();
-//	std::cout << "List Length: " << list->length << std::endl;
-//	delete list;
-//	return 0;
-//}

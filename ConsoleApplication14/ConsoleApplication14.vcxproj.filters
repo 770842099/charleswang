@@ -66,6 +66,15 @@
     <ClCompile Include="string_solution1.h">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Schedule_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Number_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Stradegy_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrieTree.h">
@@ -103,6 +112,15 @@
     </ClInclude>
     <ClInclude Include="LibInclude.h">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Schedule_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Number_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Stradegy_Solution.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

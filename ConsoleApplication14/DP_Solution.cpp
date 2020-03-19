@@ -6,7 +6,9 @@ void DP_Solution::test()
 	//boatCarryCarAccrossRiver();
 	//shortestSubStringSequence();
 
-	bag01();
+	//bag01();
+
+	bitDP();
 }
 
 #define CARS 7
@@ -182,4 +184,39 @@ void DP_Solution::bag01()
 		}
 		cout << endl;
 	}
+}
+
+void DP_Solution::bitDP()
+{
+	int pos = 0, x = 9;
+	vector<int> bit(40);
+	int dp[40][2];
+	memset(dp, -1, sizeof(dp));
+	while (x)
+	{
+		bit[pos++] = x % 2;
+		x /= 2;
+	}
+	cout << bitDPDetails(pos - 1, 0, 1, bit, dp);
+}
+
+int DP_Solution::bitDPDetails(int pos, int pre, bool limit, vector<int> bit, int dp[][2])
+{
+	if (pos == -1) return 1;
+	if (limit == 0 && dp[pos][pre] != -1) return dp[pos][pre];
+	int up = limit ? bit[pos] : 1;
+	int ans = 0;
+	for (int i = 0; i <= up; i++)
+	{
+		if (pre == 1 && i == 1)
+		{
+			//ans+=dfs(pos-1,i,limit&&i==up);
+		}
+		else
+		{
+			ans += bitDPDetails(pos - 1, i, limit&&i == up, bit, dp);
+		}
+	}
+	if (limit == 0) dp[pos][pre] = ans;
+	return ans;
 }

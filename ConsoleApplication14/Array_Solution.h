@@ -9,5 +9,16 @@ public:
 	void kthLargerNumberStack();
 
 	void slibingMaxValue();
+
+	//leetcode 300
+	void MaxIncreasedSequence();
+
+	void MaxIncreasedSequence2();
+	void binarySearchEqual();
+	void binarySearchBiggerEqual();
+	void binarySearchBigger();
+
+	//leetcode 798
+	int bestRotation(vector<int>& A);
 };
 

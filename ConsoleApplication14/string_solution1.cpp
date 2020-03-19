@@ -166,5 +166,59 @@ void  string_solution::shortestContainingSubLength()
 	cout << ans;
 }
 
+void string_solution::leetCode267_CurcleString()
+{
+	string s = "aaaabbcccceeff";
+	int locations[26];
+	memset(locations, -1, 26);
+
+	char characters[26];
+	memset(characters, 0, 26);
+
+	vector<int> numbers;
+	int index=0;
+	for (char c : s)
+	{
+		if (locations[c - 'a'] == -1)
+		{
+			locations[c - 'a'] = index;
+			characters[index] = c;
+			numbers.push_back(1);
+			index++;
+		}
+		else
+		{
+			numbers[locations[c - 'a']]++;
+		}		
+	}
+
+	for (int&i : numbers)
+	{
+		i = i / 2;
+	}
+	leetCode267_CurcleStringDetail("", numbers, characters);
+}
+
+void string_solution::leetCode267_CurcleStringDetail(string s, vector<int> chars, char* characters)
+{
+	bool ended = true;
+	for (int i = 0; i < chars.size(); i++)
+	{
+		if (chars[i] != 0)
+		{
+			string temp = s;
+			temp += characters[i];
+			chars[i]--;
+			leetCode267_CurcleStringDetail(temp, chars, characters);
+
+			chars[i]++;
+			
+			ended = false;
+		}
+	}
+	if (ended)
+		cout << s << endl;
+}
+
 
 

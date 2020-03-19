@@ -1,8 +1,5 @@
 #pragma once
-#include <algorithm>
-#include <iostream>
 #include "LibInclude.h"
-#include "linked_list.h"
 using namespace std;
 struct GreedyData
 {

@@ -16,6 +16,9 @@
 #include "DFS_Solution.h"
 #include "Bit_Solution.h"
 #include "Array_Solution.h"
+#include "Schedule_Solution.h"
+#include "Number_Solution.h"
+#include "Stradegy_Solution.h"
 using namespace std;
 
 void print_priority_queue(priority_queue<int>& q)
@@ -144,6 +147,9 @@ void test_vector()
 	{
 		cout << p.salary << endl;
 	}
+
+	vector<vector<int>> init(32, vector<int>(32,10));
+	init[31][31] = 3;
 }
 
 void test_set()
@@ -339,6 +345,7 @@ int main()
 	//test_sort();
 
 	//string_solution s_solution;
+	//s_solution.leetCode267_CurcleString();
 	//s_solution.run();
 
 	//Tree_Solution s;
@@ -377,6 +384,15 @@ int main()
 	//Array_Solution s;
 	//s.test();
 	//s.kthLargerNumber();
+
+	//Schedule_Solution s;
+	//s.test();
+
+	//Number_Solution s;
+	//s.test();
+
+	//Stradegy_Solution s;
+	//s.test();
 }
 
 

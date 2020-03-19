@@ -4,7 +4,9 @@ void Puzzle_Solution::test()
 {
 	//cal24();
 	//hannuoTa();
-	allCalculationByBrace();
+	//allCalculationByBrace();
+
+	isPossible()
 }
 
 void Puzzle_Solution::cal24()
@@ -48,8 +50,8 @@ void Puzzle_Solution::calcDetail(float a[], int num, string s[])
 					break;
 				case 2:
 					calculated = a[j] - a[j];
-scalc = LibHelper::string_sprintf("(%s-%s)", s[j].c_str(), s[i].c_str());
-break;
+					scalc = LibHelper::string_sprintf("(%s-%s)", s[j].c_str(), s[i].c_str());
+					break;
 				case 3:
 					calculated = a[i] * a[j];
 					scalc = LibHelper::string_sprintf("(%s*%s)", s[i].c_str(), s[j].c_str());
@@ -177,4 +179,26 @@ void Puzzle_Solution::allCalculationByBrace()
 }
 
 
-
+void Puzzle_Solution::isPossible()
+{
+	vector<int> nums = { 1, 2, 3, 3, 4, 4, 5, 5 };
+	
+	unordered_map<int, int> freq, need;
+	for (int num : nums) ++freq[num];
+	for (int num : nums) {
+		if (freq[num] == 0) continue;
+		if (need[num] > 0) {
+			--need[num];
+			++need[num + 1];
+		}
+		else if (freq[num + 1] > 0 && freq[num + 2] > 0) {
+			--freq[num + 1];
+			--freq[num + 2];
+			++need[num + 3];
+		}
+		else
+			cout << "false" << endl;
+		--freq[num];
+	}
+	cout<<"true";
+}

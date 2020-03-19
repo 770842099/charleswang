@@ -12,5 +12,8 @@ public:
 
 	//leetcode 243
 	void allCalculationByBrace();
+
+	//leetcode 659
+	void isPossible();
 };
 
