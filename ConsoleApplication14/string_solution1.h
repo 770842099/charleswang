@@ -15,5 +15,15 @@ public:
 
 	void leetCode267_CurcleString();
 	void leetCode267_CurcleStringDetail(string s, vector<int> chars, char* characters);
+
+	//leetcode 395
+	void maxiumStringContainsK();
+	void maxiumStringContainsKDetails(string s, int start, int end, int k, int& maxLengh);
+
+	//leetcode 411
+	void shortestPath();
+
+	//leetcode 471
+	void shortenString();
 };
 

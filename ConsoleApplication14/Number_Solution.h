@@ -9,5 +9,7 @@ public:
 	void allPossibleFactor();
 	void allPossibleFactorDetails(int remianing, int last, vector<int> result);
 
+	//leetcode 556
+	void nextBigNumber();
 };
 

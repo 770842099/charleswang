@@ -8,8 +8,12 @@ void Array_Solution::test()
 
 	//binarySearchEqual();
 	//binarySearchBiggerEqual();
-	binarySearchBigger();
+	//binarySearchBigger();
 
+	//midNumber();
+
+	vector<int> nums = { 2, 4, 3, 5, 1 };
+	cout<<mergesort_and_count(nums, 0, nums.size() - 1);
 }
 
 void Array_Solution::kthLargerNumber()
@@ -217,4 +221,80 @@ int Array_Solution::bestRotation(vector<int>& A) {
 		}
 	}
 	return res;
+}
+
+void Array_Solution::midNumber()
+{
+	vector<int> v{ 1, 3, -1, -3, 5, 3, 6, 7 };
+	vector<int> result;
+
+	int k = 3;
+	multiset<int> multimap;
+	for (int i = 0; i < k; i++)
+	{
+		multimap.insert(v[i]);
+	}
+
+	multiset<int>::iterator p=	multimap.begin();
+	for (int i = 0; i < k / 2; i++)
+		p++;
+	result.push_back(*p);
+	for (int i = k; i < v.size(); i++)
+	{
+		// Insert incoming element
+		multimap.insert(v[i]);
+		if (v[i] < *p)
+			p--;                  // same as mid = prev(mid)
+
+		// Remove outgoing element
+		if (v[i - k] <= *p)
+			p++;                  // same as mid = next(mid)
+
+		multimap.erase(multimap.lower_bound(v[i - k]));
+
+		result.push_back(*p);
+	}
+
+	for (int value : result)
+	{
+		cout << value << " ";
+	}
+}
+
+
+int Array_Solution::mergesort_and_count(vector<int>& A, int start, int end)
+{
+	if (start < end) {
+		int mid = (start + end) / 2;
+		int count = mergesort_and_count(A, start, mid) + mergesort_and_count(A, mid + 1, end);
+		int j = mid + 1;
+		for (int i = start; i <= mid; i++) {
+			while (j <= end && A[i] > A[j] * 2LL)
+				j++;
+			count += j - (mid + 1);
+		}
+		merge(A, start, mid, end);
+		return count;
+	}
+	else
+		return 0;
+}
+
+
+void Array_Solution::merge(vector<int>& A, int start, int mid, int end)
+{
+	int n1 = (mid - start + 1);
+	int n2 = (end - mid);
+	vector<int> L(n1), R(n2);
+	for (int i = 0; i < n1; i++)
+		L[i] = A[start + i];
+	for (int j = 0; j < n2; j++)
+		R[j] = A[mid + 1 + j];
+	int i = 0, j = 0;
+	for (int k = start; k <= end; k++) {
+		if (j >= n2 || (i < n1 && L[i] <= R[j]))
+			A[k] = L[i++];
+		else
+			A[k] = R[j++];
+	}
 }

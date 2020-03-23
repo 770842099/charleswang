@@ -20,5 +20,14 @@ public:
 
 	//leetcode 798
 	int bestRotation(vector<int>& A);
+
+	//leetcode 480
+	void midNumber();
+
+	//leetcode πÈ≤¢≈≈–Ú 493
+	int mergesort_and_count(vector<int>& A, int start, int end);
+	void merge(vector<int>& A, int start, int mid, int end);
+
+
 };
 

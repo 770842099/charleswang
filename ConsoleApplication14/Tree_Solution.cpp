@@ -3,7 +3,14 @@
 
 void Tree_Solution::test()
 {
-	commonAncestor();
+	//commonAncestor();
+	//NLConstruction2();
+
+	//print2DUtil(createTreeWithNum(1, 14),0);
+
+	//print2DUtil(createTree(vector<int>{10, 7, 13, 4, 8, 11, 15, 2, 5, NULL,9}),0);
+
+	binaryTreeOrder();
 }
 
 TreeNode* Tree_Solution::Create(vector<TreeValue> values)
@@ -75,7 +82,7 @@ void Tree_Solution::midTraverse(TreeNode *root)
 }
 
 
-void NLParse(stack<int> states, string& s, int pos, int height, int maxlength, vector<int>& ans)
+void Tree_Solution::NLParse(stack<int> states, string& s, int pos, int height, int maxlength, vector<int>& ans)
 {
 	maxlength = max(maxlength, height);
 	if (pos == s.length())
@@ -123,9 +130,7 @@ void NLParse(stack<int> states, string& s, int pos, int height, int maxlength, v
 			NLParse(states, s, pos, height-1, maxlength, ans);
 		}
 	}
-
 }
-
 
 vector<int> Tree_Solution::NLConstruction()
 {
@@ -142,6 +147,44 @@ vector<int> Tree_Solution::NLConstruction()
 		cout << i << endl;
 	return ans;
 }
+
+void Tree_Solution::NLConstruction2()
+{
+	string s = "NNLLL";
+	int maxLength = 0;
+	cout<<NLParse2(s, 0, s.length()-1);
+	
+}
+
+int Tree_Solution::NLParse2(string s, int start, int end)
+{
+	if (start > end)
+		return -1;
+	else if (start == end)
+		if (s[start] == 'N')
+			return -1;
+		else
+			return 1;
+	else if (s[start] == 'L')
+		return -1;
+
+	int height = -1;
+	for (int i = start+1; i <= end; i++)
+	{
+		int height_left = NLParse2(s, start + 1, i);
+
+		if (height_left != -1)
+		{
+			int height_right = NLParse2(s, i + 1, end);
+			if (height_right != -1)
+			{
+				height = max(max(height_left, height_right), height);
+			}
+		}
+	}
+	return height+1;
+}
+
 
 void Tree_Solution::priorMidRecreation()
 {
@@ -216,6 +259,119 @@ void Tree_Solution::commonAncestorDetails(TreeNode* t,vector<int> parents, vecto
 	commonAncestorDetails(t->left, parents, s1, v1, s2, v2);
 	commonAncestorDetails(t->right, parents, s1, v1, s2, v2);
 }
+
+TreeNode* Tree_Solution::createTree(vector<int> v)
+{
+	TreeNode * root = new TreeNode(v[0]);
+	queue<TreeNode*> q;
+	q.push(root);
+	for (int i = 1; i < v.size(); i=i+2)
+	{
+		TreeNode* n = q.front();
+		q.pop();
+		if (v[i]!=NULL)
+			n->left = new TreeNode(v[i]);
+		if (v[i+1] != NULL)
+			n->right = new TreeNode(v[i + 1]);
+		if (n->left != NULL)
+			q.push(n->left);
+		if (n->right != NULL)
+			q.push(n->right);
+	}
+	return root;
+}
+
+TreeNode* Tree_Solution::createTreeWithNum(int start, int end)
+{
+	int value = (start + end) / 2;
+	TreeNode* root = new TreeNode(value);
+	if (start < value)
+		root->left = createTreeWithNum(start, value - 1);
+	if (value < end)
+		root->right = createTreeWithNum(value + 1, end);
+	return root;
+}
+
+void Tree_Solution::print2DUtil(TreeNode*root, int space)
+{
+	// Base case  
+	if (root == NULL)
+		return;
+
+	// Increase distance between levels  
+	space += 6;
+
+	// Process right child first  
+	print2DUtil(root->right, space);
+
+	// Print current node after space  
+	// count  
+	cout << endl;
+	for (int i = 6; i < space; i++)
+		cout << " ";
+	cout << root->val << "\n";
+
+	// Process left child  
+	print2DUtil(root->left, space);
+}
+
+void Tree_Solution::binaryTreeOrder()
+{
+	vector<TreeValue> values = { {2,1,3},{3,4,8},{4,5,6} };
+	TreeNode* n= Create(values);
+	int result=0;
+	binaryTreeOrderDetails(n, result);
+	cout << result;
+}
+
+//int[0] uptimes, int[1] up number, int[2] downtimes, int[3] down number
+int* Tree_Solution::binaryTreeOrderDetails(TreeNode* node, int& result)
+{
+	if (node == NULL)
+	{
+		int a[4] = { -110,-100,-110,-110 };
+		return a;
+	}
+
+	int* left = binaryTreeOrderDetails(node->left, result);
+	int* right = binaryTreeOrderDetails(node->right, result);
+
+	//first check up
+	int* returnResult = new int[4]{ 1,1,1,1 };
+	returnResult[1] = node->val;
+	returnResult[3] = node->val;
+
+	if (left[1] + 1 == node->val)
+	{
+		returnResult[1] = node->val;
+		returnResult[0] = left[0] + 1;
+	}
+
+	if (right[1] + 1 == node->val)
+	{
+		returnResult[1] = node->val;
+		returnResult[0] = max(right[0]+1, returnResult[0]);
+	}
+
+	if (left[3] - 1 == node->val)
+	{
+		returnResult[3] = node->val;
+		returnResult[2] = left[2] + 1;
+	}
+	cout << "right:"<<right[3] << endl;
+	cout << "node->val:" << node->val << endl << endl;
+	if (right[3] -1 == node->val)
+	{
+		returnResult[3] = node->val;
+		returnResult[2] = max(right[2] + 1, returnResult[2]);
+	}
+	
+	result = max(returnResult[0] + returnResult[2] - 1, result);
+	return returnResult;
+}
+
+
+
 
 
 

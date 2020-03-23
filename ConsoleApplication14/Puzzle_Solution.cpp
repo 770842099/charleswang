@@ -6,7 +6,7 @@ void Puzzle_Solution::test()
 	//hannuoTa();
 	//allCalculationByBrace();
 
-	isPossible()
+	isPossible();
 }
 
 void Puzzle_Solution::cal24()

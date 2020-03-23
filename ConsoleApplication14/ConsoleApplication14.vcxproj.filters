@@ -75,6 +75,15 @@
     <ClCompile Include="Stradegy_Solution.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Map_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UnionSetUtil.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Stack_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrieTree.h">
@@ -120,6 +129,15 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="Stradegy_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionSetUtil.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack_Solution.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

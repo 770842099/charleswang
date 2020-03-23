@@ -8,7 +8,15 @@ void DP_Solution::test()
 
 	//bag01();
 
-	bitDP();
+	//bitDP();
+	//guessNumbers();
+
+	//ing();
+
+	//AllArrangement();
+	//maxiumnOneAndZero();
+
+	basicBag01();
 }
 
 #define CARS 7
@@ -219,4 +227,130 @@ int DP_Solution::bitDPDetails(int pos, int pre, bool limit, vector<int> bit, int
 	}
 	if (limit == 0) dp[pos][pre] = ans;
 	return ans;
+}
+
+void  DP_Solution::guessNumbers()
+{
+	int n = 10;
+	vector<vector<int>> dp(n+1, { vector<int>(n+1, 99999999) });
+	for (int i = 1; i <= n; i++)
+	{
+		dp[i][i] = 0;
+	}
+
+	for (int i = 2; i <=n; i++)
+	{
+		for (int j = 1; j <= n - i+1; j++)
+		{
+			dp[j][j + i - 1] = min(dp[j][j + i - 1], j + dp[j + 1][j + i - 1]);
+			for (int inter = 1; inter < i-1; inter++)
+			{
+				dp[j][j + i - 1] = min(dp[j][j + i - 1], 
+					max(
+						dp[j][j + inter - 1],
+						dp[j + inter + 1][j + i - 1]
+					)+ j + inter);
+			}
+			dp[j][j + i - 1] = min(dp[j][j + i - 1], dp[j][j + i - 2]+ (j + i -1));
+		}
+	}
+	cout << dp[1][n];
+}
+
+
+
+void DP_Solution::Swing()
+{
+	vector<int> x = {1,17,5,10,13,15,10,5,16,8};
+	vector<vector<int>> dp{ x.size(),vector<int>(2,0) };
+
+	//up
+	dp[0][0] = 1;
+	//down
+	dp[0][1] = 1;
+
+	for (int i = 1; i < dp.size(); i++)
+	{
+		for (int j = i - 1; j >= 0; j--)
+		{
+			if (x[i]> x[j])
+				dp[i][0] = max(dp[i][0], dp[j][1] + 1);
+			if (x[i] < x[j])
+				dp[i][1] = max(dp[i][1], dp[j][0] + 1);
+		}
+	}
+	cout << max(dp[x.size() - 1][0], dp[x.size() - 1][1]);
+}  
+
+void  DP_Solution::AllArrangement()
+{
+	vector<int> s = { 1, 2, 3 };
+	int target = 4;
+	vector<int> dp(5,0);
+	dp[0] = 1;
+	for (int i = 1; i <= 4; i++)
+	{
+		for (int j = 0; j < s.size(); j++)
+		{
+			if (i - s[j] >=0)
+				dp[i] += dp[i - s[j]];
+		}
+	}
+	cout << dp[4] << endl;
+}
+
+void DP_Solution::maxiumnOneAndZero()
+{
+	vector<string> arrays = { "10", "0001", "111001", "1", "0" };
+	vector<pair<int, int>> numbers;
+	for (string s : arrays)
+	{
+		pair<int, int>p(0, 0);
+		for (char c : s)
+		{
+			if (c == '1')
+				p.first++;
+			else
+				p.second++;
+		}
+		numbers.push_back(p);
+	}
+
+	int m = 3, n = 5;
+	vector<vector<vector<int>>> dp(arrays.size()+1, vector<vector<int>>(m+1, vector<int>(n+1, 0)));
+	for (int i = 1; i <= arrays.size(); i++)
+	{
+		for (int j = m; j >=1; j--)
+		{
+			for (int k=n; k>=1; k--)
+			{
+	
+				dp[i][j][k] = dp[i - 1][j][k];
+				
+				if (j >= numbers[i-1].first && k >= numbers[i-1].second)
+					dp[i][j][k] = max(dp[i][j][k], dp[i-1][j - numbers[i-1].first][k - numbers[i-1].second]+1);
+			}
+		}
+	}
+	cout << dp[arrays.size()][m][n];
+}
+
+void DP_Solution::basicBag01()
+{
+	vector<int> v{ 1,2,3,4,5 };
+	int num = 6;
+	vector<vector<int>> dp(v.size()+1, vector<int>(num+1,0));
+	dp[0][0] = 1;
+
+	for (int i = 1; i <= v.size(); i++)
+	{
+		for (int j = num; j >= 0; j--)
+			dp[i][j] = dp[i - 1][j];
+		
+		for (int j = num; j >= v[i - 1]; j--)
+		{
+			dp[i][j] += dp[i - 1][j - v[i - 1]];
+		}
+	}
+	cout << dp[v.size()][num];
 }

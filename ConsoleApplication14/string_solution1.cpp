@@ -8,7 +8,12 @@ void string_solution::run()
 
 	//test_function();
 	//yixuci();
-	shortestContainingSubLength();
+	//shortestContainingSubLength();
+
+	//xiumStringContainsK();
+
+	//shortestPath();
+	shortenString();
 }
 
 
@@ -218,6 +223,152 @@ void string_solution::leetCode267_CurcleStringDetail(string s, vector<int> chars
 	}
 	if (ended)
 		cout << s << endl;
+}
+
+void string_solution::maxiumStringContainsK()
+{
+	string s = "aabbcddbbbkaaaa";
+	int k = 2;
+	int length = 0;
+	maxiumStringContainsKDetails(s, 0, s.length() - 1, 2, length);
+	cout << length;
+}
+
+void string_solution::maxiumStringContainsKDetails(string s, int start, int end, int k, int& maxLength)
+{
+	vector<int> times(26, 0);
+	for (int i = start; i <= end; i++)
+	{
+		times[s[i] - 'a']++;
+	}
+	unordered_set<char> unlegal;
+
+	for (int i = 0; i < 26; i++)
+	{
+		if (times[i] != 0 && times[i] < k)
+			unlegal.insert(i);
+	}
+	if (unlegal.size() == 0)
+	{
+		maxLength = max(maxLength, end - start + 1);
+	}
+	else
+	{
+		vector<int> unlegalLocation;
+		for (int i = 0; i < s.length() - 1; i++)
+		{
+			if (unlegal.count(s[i]-'a') > 0)
+				unlegalLocation.push_back(i);
+		}
+		
+		for (int i = 0; i < unlegalLocation.size() - 1; i++)
+		{
+			if (unlegalLocation[i] + 1 != unlegalLocation[i + 1])
+				maxiumStringContainsKDetails(s, unlegalLocation[i] + 1, unlegalLocation[i + 1] - 1, k, maxLength);
+		}
+
+	}
+}
+
+void  string_solution::shortestPath()
+{
+	vector<string> keywords{ "aabbe", "aabbf", "aacce" };
+	string s = "aabce";
+
+	vector<int> diff;
+	for (string s1 : keywords)
+	{
+		int v = 0;
+		for (int i = 0; i < s.length(); i++)
+		{
+			v <<= 1;
+			if (s[i]!= s1[i])
+				v += 1;
+		}
+		diff.push_back(v);
+	}
+
+	int types = 1 << s.size();
+	int minValue = s.size();
+	vector<int> vValue;
+	for (int i = 0; i < types; i++)
+	{
+		int test = i;
+		bool match = true;
+		for (int j = 0; j < keywords.size(); j++)
+		{
+			if ((test & diff[j]) == 0)
+			{
+				match = false;
+				break;
+			}
+		}
+		if (match)
+		{
+			int numof1;
+			vector<int> vtemp = LibHelper::int_to_binary(i, numof1);
+			if (numof1 < minValue)
+			{
+				vValue = vtemp;
+				minValue = numof1;
+
+				int length = vValue.size();
+				for (int i = 0; i < s.size() - length; i++)
+					vValue.insert(vValue.begin(), 0);
+			}
+		}
+	}
+	for (int i = 0; i < vValue.size(); i++)
+		cout << vValue[i];
+	cout << endl;
+
+	int precending0 = 0;
+	for (int i = 0; i < vValue.size(); i++)
+	{
+		if (vValue[i] == 0)
+			precending0++;
+		else
+		{
+			if (precending0 != 0)
+			{
+				cout << precending0;
+				precending0 = 0;
+			}
+			cout << s[i];
+		}
+	}
+	if (precending0 != 0)
+		cout << precending0;
+}
+
+void string_solution::shortenString()
+{
+	string s = "abbbabbbcabbbabbbc";
+	vector<vector<string>> d(s.size(), vector<string>(s.size(), ""));
+
+	for (int len = 1; len <= s.size(); len++)
+	{
+		for (int i = 0; i + len-1<s.size(); i++)
+		{
+			int j = i + len - 1;
+			string& ans = d[i][j];
+			ans = s.substr(i, len);
+			if (len > 5)
+			{
+				int p = (ans + ans).find(ans, 1);
+				if (p < s.size())
+				{
+					ans = to_string(ans.size() / p) + "[" + d[i][i+p-1]+"]";
+				}
+				for (int k = i; k < j; k++)
+				{
+					if (d[i][k].size() + d[k + 1][j].size() < ans.size())
+						ans = d[i][k] + d[k + 1][j];
+				}
+			}
+		}
+	}
+	cout<< d[0][s.size() - 1];
 }
 
 

@@ -34,10 +34,28 @@ public:
 
 	vector<int> NLConstruction();
 
+	void NLConstruction2();
+
+	void NLParse(stack<int> states, string& s, int pos, int height, int maxlength, vector<int>& ans);
+	int NLParse2(string s, int start, int end);
+
 	void priorMidRecreation();
 	TreeNode* priorMidRecreationDetail(string middle, string first, unordered_map<char, int> map);
 
 	void commonAncestor();
 	TreeNode* Create(vector<TreeValue> values);
     void commonAncestorDetails(TreeNode* t, vector<int> parents, vector<int>& s1, int v1, vector<int>& s2, int v2);
+
+	TreeNode* createTree(vector<int> v);
+	
+	TreeNode* createTreeWithNum(int start, int end);
+
+	void print2DUtil(TreeNode*root, int space);
+
+	//leetcode 549
+	void binaryTreeOrder();
+	int* binaryTreeOrderDetails(TreeNode* node, int& result);
+
+
+
 };

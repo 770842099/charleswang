@@ -45,6 +45,30 @@ public:
 		}
 		return subject;
 	}
+
+	vector<int> static int_to_binary(int num, int& numof1)
+	{
+		numof1 = 0;
+		vector<int> v;
+		while (num)
+		{
+			if (num & 1)
+			{
+				numof1++;
+				v.insert(v.begin(), 1);
+			}
+			else
+			{
+				v.insert(v.begin(), 0);
+			}
+			num >>= 1;
+		}
+		return v;
+	}
+
+	int static find_rep_sub_size(string s) {
+		return (s + s).find(s, 1);
+	}
 };
 
 struct Trible
