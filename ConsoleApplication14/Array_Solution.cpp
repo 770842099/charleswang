@@ -12,8 +12,12 @@ void Array_Solution::test()
 
 	//midNumber();
 
-	vector<int> nums = { 2, 4, 3, 5, 1 };
-	cout<<mergesort_and_count(nums, 0, nums.size() - 1);
+	//vector<int> nums = { 2, 4, 3, 5, 1 };
+	//cout<<mergesort_and_count(nums, 0, nums.size() - 1);
+
+	//totalSum();
+
+	containsSubString();
 }
 
 void Array_Solution::kthLargerNumber()
@@ -297,4 +301,64 @@ void Array_Solution::merge(vector<int>& A, int start, int mid, int end)
 		else
 			A[k] = R[j++];
 	}
+}
+
+void Array_Solution::totalSum()
+{
+	vector<int> nums = { 1,2,3,4,5,6,7 };
+	int k = 9;
+	int count = 0;
+	unordered_map<int, int> m;
+	m[0] = 1;
+	int sum = 0;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		sum += nums[i];
+		count += m[sum-k];
+		if (m.count(sum) > 0)
+			m[sum]++;
+		else
+			m[sum] = 1;
+	}
+	cout << count;
+}
+
+void Array_Solution::containsSubString()
+{
+	string s1 = "abo", s2 = "eidbaoooba";
+	vector<int> nums(26, 0);
+	vector<int> cur(26, 0);
+	int totalMatched = 0;
+	for (char c : s1)
+	{
+		nums[c - 'a']++;
+	}
+
+	for (int i = 0; i < s1.size(); i++)
+	{
+		cur[s2[i] - 'a']++;
+	}
+
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (nums[i] == cur[i] && nums[i] != 0)
+			totalMatched++;
+	}
+	int count = totalMatched==s1.size() ? 1 : 0;
+
+	for (int i = s1.size(); i < s2.size(); i++)
+	{
+		cur[s2[i] - 'a']++;
+		if (cur[s2[i] - 'a'] == nums[s2[i] - 'a'])
+			totalMatched++;
+
+		int pre = i - s1.size();
+		if (cur[s2[pre] - 'a'] == nums[s2[pre] - 'a'])
+			totalMatched--;
+		cur[s2[pre] - 'a']--;
+
+		count+= totalMatched == s1.size() ? 1 : 0;
+	}
+	cout << count;
+
 }

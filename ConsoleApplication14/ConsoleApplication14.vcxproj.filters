@@ -16,6 +16,9 @@
     <Filter Include="Util">
       <UniqueIdentifier>{96ac1c62-a10b-4d0a-9997-9af0d610ac55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Special">
+      <UniqueIdentifier>{1df75df8-cfbb-4eb5-a8c6-a922698613d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication14.cpp">
@@ -84,6 +87,12 @@
     <ClCompile Include="Stack_Solution.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Sort_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SegmentTree.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrieTree.h">
@@ -139,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="Stack_Solution.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort_Solution.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SegmentTree.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="RangeModule.h">
+      <Filter>Special</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

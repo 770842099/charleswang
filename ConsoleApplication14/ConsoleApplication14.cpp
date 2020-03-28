@@ -21,6 +21,9 @@
 #include "Stradegy_Solution.h"
 #include "Map_Solution.h"
 #include "Stack_Solution.h"
+#include "Sort_Solution.h"
+#include "SegmentTree.h"
+#include "RangeModule.h"
 using namespace std;
 
 void print_priority_queue(priority_queue<int>& q)
@@ -350,8 +353,8 @@ int main()
 	//s_solution.leetCode267_CurcleString();
     //s_solution.run();
 
-	Tree_Solution s;
-	s.test();
+	//Tree_Solution s;
+	//s.test();
 
 	//s.midTraverse(s.init());
 	//s.priorMidRecreation();
@@ -370,7 +373,7 @@ int main()
 	//s.test();
 
     //DP_Solution dp;
-	//dp.test();
+    //dp.test();
 
 	//Puzzle_Solution puzzle;
 	//puzzle.test();
@@ -402,6 +405,19 @@ int main()
 
 	//Stack_Solution s;
 	//s.test();
+
+	//Array_Solution s;
+	//s.test();
+
+	//Sort_Solution s;
+	//s.test();
+
+	//SegmentTree t;
+	//t.test();
+
+	RangeModule m;
+	m.test();
 }
+
 
 

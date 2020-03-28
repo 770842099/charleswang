@@ -3,7 +3,8 @@
 
 void Number_Solution::test()
 {
-	allPossibleFactor();
+	//allPossibleFactor();
+	nextBigNumber();
 }
 
 
@@ -38,5 +39,28 @@ void Number_Solution::allPossibleFactorDetails(int remaining, int last, vector<i
 			}
 		}
 	}
+}
+
+void Number_Solution::nextBigNumber()
+{
+	string s = "12379862";
+	int i = s.size() - 1;
+	while (i - 1 >= 0 && s[i - 1] >= s[i])
+		i--;
+
+	int first = i - 1;
+	if (i == 0)
+		cout << s;
+	else
+	{
+		char c = s[i - 1];
+		while (c <= s[i] &i<=s.size()-1)
+			i++;
+		swap(s[first], s[i - 1]);
+	}
+	
+	for (int i = first + 1, k = s.size() - 1; i < k; i++, k--)
+		swap(s[i], s[k]);
+	cout << s;
 }
 

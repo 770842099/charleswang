@@ -28,6 +28,14 @@ public:
 
 	//leetcode 494
 	void basicBag01();
+
+	//leetcode 583
+	void removeCharacters();
+
+	//leetcode 646
+	void findLongestChain1();
+	void findLongestChain2();
+
 };
 
 

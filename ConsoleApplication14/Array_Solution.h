@@ -28,6 +28,10 @@ public:
 	int mergesort_and_count(vector<int>& A, int start, int end);
 	void merge(vector<int>& A, int start, int mid, int end);
 
+	//leetcode560
+	void totalSum();
 
+	//leetcode567
+	void containsSubString();
 };
 

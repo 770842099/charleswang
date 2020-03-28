@@ -166,6 +166,8 @@
     <ClCompile Include="Puzzle_Solution.cpp" />
     <ClCompile Include="Recursive_Solution.cpp" />
     <ClCompile Include="Schedule_Solution.cpp" />
+    <ClCompile Include="SegmentTree.cpp" />
+    <ClCompile Include="Sort_Solution.cpp" />
     <ClCompile Include="Stack_Solution.cpp" />
     <ClCompile Include="Stradegy_Solution.cpp" />
     <ClCompile Include="string_solution1.cpp" />
@@ -186,8 +188,11 @@
     <ClInclude Include="Map_Solution.h" />
     <ClInclude Include="Number_Solution.h" />
     <ClInclude Include="Puzzle_Solution.h" />
+    <ClInclude Include="RangeModule.h" />
     <ClInclude Include="Recursive_Solution.h" />
     <ClInclude Include="Schedule_Solution.h" />
+    <ClInclude Include="SegmentTree.h" />
+    <ClInclude Include="Sort_Solution.h" />
     <ClInclude Include="Stack_Solution.h" />
     <ClInclude Include="Stradegy_Solution.h" />
     <ClInclude Include="Tree_Solution.h" />

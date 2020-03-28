@@ -11,5 +11,7 @@ public:
 
 	//leetcode 556
 	void nextBigNumber();
+
+
 };
 

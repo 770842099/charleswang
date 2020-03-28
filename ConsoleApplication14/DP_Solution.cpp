@@ -16,7 +16,11 @@ void DP_Solution::test()
 	//AllArrangement();
 	//maxiumnOneAndZero();
 
-	basicBag01();
+	//basicBag01();
+
+	//removeCharacters();
+	//findLongestChain1();
+	findLongestChain2();
 }
 
 #define CARS 7
@@ -353,4 +357,68 @@ void DP_Solution::basicBag01()
 		}
 	}
 	cout << dp[v.size()][num];
+}
+
+void DP_Solution::removeCharacters()
+{
+	string s1 = "sea", s2 = "eat";
+	vector<vector<int>> dp(s1.size()+1, vector<int>(s2.size()+1, 0));
+	for (int i = 0; i <= s1.size(); i++)
+		dp[i][0] = i;
+	for (int i = 0; i <= s2.size(); i++)
+		dp[0][i] = i;
+
+	for (int i=1; i<=s1.size();i++)
+		for (int j = 1; j <= s2.size(); j++)
+		{
+			if (s1[i-1] == s2[j-1])
+				dp[i][j] = dp[i - 1][j - 1];
+			else
+				dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + 1;
+		}
+	cout << dp[s1.size()][s2.size()];
+
+}
+
+void DP_Solution::findLongestChain1()
+{
+	vector<vector<int>> pairs = { {1, 3},{2, 3},{4, 5}, {2,4}, {6,8} };
+	sort(pairs.begin(), pairs.end(), [](const vector<int>& a, const vector<int>& b) {
+		return (a[0] < b[0]) || (a[0] == b[0] && a[1] < b[1]);
+	});
+	int n = pairs.size();
+	int res = 1;
+	vector<int> dp(n, 1);
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			if (pairs[j][1] < pairs[i][0])
+			{
+				dp[i] = max(dp[i], dp[j] + 1);
+			}
+		}
+		res = max(res, dp[i]);
+	}
+	cout << res;
+}
+
+void DP_Solution::findLongestChain2()
+{
+	vector<vector<int>> pairs = { {1, 3},{2, 3},{4, 5}, {2,4}, {6,8} };
+	sort(pairs.begin(), pairs.end(), [](const vector<int>& a, const vector<int>& b) {
+		return (a[1] < b[1]) || (a[1] == b[1] && a[0] < b[0]);
+	});
+	vector<int> dp(pairs.size());
+	dp[0] = 1;
+	vector<int> lastValue{ pairs[0][1] };
+	for (int i = 1; i < pairs.size(); i++)
+	{
+		dp[i] = dp[i - 1];
+		int l= lower_bound(lastValue.begin(), lastValue.end(), pairs[i][0])- lastValue.begin()-1;
+		if (l >= 0)
+			dp[i] = max(dp[i], dp[l]+1);
+		lastValue.push_back(pairs[i][1]);
+	}
+	cout << dp[pairs.size() - 1];
 }
