@@ -24,6 +24,7 @@
 #include "Sort_Solution.h"
 #include "SegmentTree.h"
 #include "RangeModule.h"
+#include "BFS_Solution.h"
 using namespace std;
 
 void print_priority_queue(priority_queue<int>& q)
@@ -353,8 +354,8 @@ int main()
 	//s_solution.leetCode267_CurcleString();
     //s_solution.run();
 
-	//Tree_Solution s;
-	//s.test();
+	Tree_Solution s;
+    s.test();
 
 	//s.midTraverse(s.init());
 	//s.priorMidRecreation();
@@ -415,8 +416,11 @@ int main()
 	//SegmentTree t;
 	//t.test();
 
-	RangeModule m;
-	m.test();
+	//RangeModule m;
+	//m.test();
+
+	//BFS_Solution s;
+	//s.test();
 }
 
 

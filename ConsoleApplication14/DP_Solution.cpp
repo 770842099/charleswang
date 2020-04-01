@@ -20,7 +20,15 @@ void DP_Solution::test()
 
 	//removeCharacters();
 	//findLongestChain1();
-	findLongestChain2();
+	//findLongestChain2();
+
+	//largestSumOfAverages();
+
+	//profitPlan();
+	//numMusicPlaylists();
+
+	//distinctSubseqII();
+	tallestBillboard();
 }
 
 #define CARS 7
@@ -421,4 +429,126 @@ void DP_Solution::findLongestChain2()
 		lastValue.push_back(pairs[i][1]);
 	}
 	cout << dp[pairs.size() - 1];
+}
+
+void DP_Solution::largestSumOfAverages()
+{
+	vector<int> v{ 9, 1, 2, 3, 9 };
+	int k = 3;
+	vector<vector<int>> dp(v.size() + 1, vector<int>(k + 1, 0));
+	vector<int> sum(v.size()+1);
+
+	sum[0] = 0;
+	for (int i = 1; i <= v.size(); i++)
+	{
+		sum[i] = sum[i - 1] + v[i-1];
+	}
+
+	for (int j = 1; j <= k; j++)
+	{
+		for (int i = j; i <= v.size(); i++)
+		{
+			for (int p = j-1; p < i; p++)
+			{
+				dp[i][j] = max(dp[i][j], dp[p][j - 1] + (sum[i] - sum[p]) / (i - p));
+			}
+		}
+	}
+	cout << dp[v.size()][k] << endl;
+}
+
+void DP_Solution::profitPlan()
+{
+	int G = 5, P = 3;
+	vector<int> group = { 2, 2 }, profit = { 2, 3 };
+		int N = profit.size();
+		vector<vector<vector<long> > > dp(N + 1, vector<vector<long> >(G + 1, vector<long>(P + 1, 0)));
+		for (int i = 0; i <= N; ++i) {
+			for (int j = 0; j <= G; ++j) {
+				dp[i][j][0] = 1;
+			}
+		}
+		for (int i = 1; i <= N; ++i) {
+			int g = group[i - 1];
+			int p = profit[i - 1];
+			for (int j = 1; j <= G; ++j) {
+				for (int k = 0; k <= P; ++k) {
+					dp[i][j][k] = dp[i - 1][j][k];
+					if (j >= g) {
+						dp[i][j][k] += dp[i - 1][j - g][max(k - p, 0)];
+					}
+				}
+			}
+		}
+		cout<< dp[N][G][P];
+}
+
+void DP_Solution::numMusicPlaylists()
+{
+	int N = 3, L = 3, K = 1;
+	vector<vector<int>> dp(L + 1, vector<int>(N + 1, 0));
+
+	dp[0][0] = 1;
+	for (int i = 1; i <= L; i++)
+	{
+		for (int j = 1; j <= N; j++)
+		{
+			dp[i][j] += dp[i - 1][j - 1] * (N - j + 1);
+			dp[i][j] += dp[i - 1][j] * max(j - K, 0);
+		}
+	}
+	cout << dp[L + 1][N + 1];
+}
+
+void DP_Solution::distinctSubseqII()
+{
+	string s = "aba";
+	vector<int> dp(s.size());
+	vector<int> lastPosition(26, -1);
+	dp[0] = 2;
+	lastPosition[s[0] - 'a'] = 0;
+	for (int i = 1; i < s.size(); i++)
+	{
+		dp[i] = 2 * dp[i - 1];
+		if (lastPosition[s[i] - 'a']!=-1)
+			dp[i] -= dp[lastPosition[s[i] - 'a']];
+		lastPosition[s[i] - 'a'] = i;
+	}
+	cout << dp[s.size() - 1]--;
+
+}
+void DP_Solution::tallestBillboard()
+{
+	vector<int> data = { 1, 2, 3, 4, 5, 6 };
+	int sum = 0;
+	for (int i = 0; i < data.size(); i++)
+	{
+		sum += data[i];
+	}
+	vector<vector<int>> dp(data.size() + 1, vector<int>(sum + 1, 0));
+	vector<int> visited(sum+1, false);
+	visited[0] = true;
+	
+	for (int i = 1; i <= data.size(); i++)
+	{
+		vector<int> visitedTemp = visited;
+		for (int j = 0; j <= sum; j++)
+		{
+			dp[i][j] = dp[i - 1][j];
+
+			if (visitedTemp[abs(j - data[i - 1])])
+			{
+				dp[i][j] = max(dp[i][j], dp[i - 1][abs(j - data[i - 1])] + data[i - 1]);
+				visited[j] = true;
+			}
+
+			if (j + data[i - 1] <= sum && visitedTemp[j + data[i - 1]])
+			{
+				dp[i][j] = max(dp[i][j], dp[i - 1][j + data[i - 1]] + data[i - 1]);
+				visited[j] = true;
+			}
+		}
+	}
+
+	cout << dp[data.size()][0];
 }

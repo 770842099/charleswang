@@ -33,5 +33,11 @@ public:
 
 	//leetcode567
 	void containsSubString();
+
+	//leetcode731
+	void duplicatedOrder();
+
+	//leetcode 926
+	void minFlipsMonoIncr();
 };
 

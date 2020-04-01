@@ -23,5 +23,9 @@ public:
 	bool topOrder();
 	void test();
 	void shortestPath();
+
+	void graphColoring();
+	void graphColoringDetails(bool graph[4][4], int m, int color[], int v);
+
 };
 

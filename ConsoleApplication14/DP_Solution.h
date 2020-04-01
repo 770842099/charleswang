@@ -36,6 +36,20 @@ public:
 	void findLongestChain1();
 	void findLongestChain2();
 
+	//leetcode 813
+	void largestSumOfAverages();
+
+	//leetcode 879
+	void profitPlan();
+
+	//leetcode 920
+	void numMusicPlaylists();
+
+	//leetcode 940
+	void distinctSubseqII();
+
+	//leetcode 956
+	void tallestBillboard();
 };
 
 

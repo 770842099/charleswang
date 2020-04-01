@@ -4,7 +4,8 @@
 
 void Stradegy_Solution::test()
 {
-	transfer();
+	//transfer();
+	rate21();
 }
 
 //leetcode 294
@@ -36,4 +37,24 @@ bool Stradegy_Solution::transferDetails(map<string, bool>& memo, string s)
 	}
 	memo[s] = false;
 	return false;
+}
+
+void Stradegy_Solution::rate21()
+{
+	int n = 10, k = 1, w = 10;
+	vector<double> dp(max(k + w+1, n+w+1), 0);
+	dp[0] = 1;
+	for (int i = 0; i < k; i++)
+	{
+		for (int p = 1; p <= w; p++)
+		{
+			dp[i + p] += dp[i] * 1 / w;
+		}
+	}
+	double sum = 0;
+	for (int j = n; j <k + w; j++)
+	{
+		sum += dp[j];
+	}
+	cout << 1 - sum;
 }

@@ -8,5 +8,8 @@ public :
 	//leetcode 294
 	void transfer();
 	bool transferDetails(map<string, bool>& memo, string s);
+
+	//leetcode 837
+	void rate21();
 };
 

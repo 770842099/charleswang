@@ -93,6 +93,9 @@
     <ClCompile Include="SegmentTree.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="BFS_Solution.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrieTree.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="RangeModule.h">
       <Filter>Special</Filter>
+    </ClInclude>
+    <ClInclude Include="BFS_Solution.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

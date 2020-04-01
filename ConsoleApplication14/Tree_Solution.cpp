@@ -1,5 +1,6 @@
 #include "Tree_Solution.h"
 #include "LibInclude.h"
+using namespace std;
 
 void Tree_Solution::test()
 {
@@ -10,7 +11,13 @@ void Tree_Solution::test()
 
 	//print2DUtil(createTree(vector<int>{10, 7, 13, 4, 8, 11, 15, 2, 5, NULL,9}),0);
 
-	binaryTreeOrder();
+	//binaryTreeOrder();
+	//splitBST();
+
+	//constructFromPrePost();
+	//allPossibleFBT();
+
+	distributeCoins();
 }
 
 TreeNode* Tree_Solution::Create(vector<TreeValue> values)
@@ -269,9 +276,9 @@ TreeNode* Tree_Solution::createTree(vector<int> v)
 	{
 		TreeNode* n = q.front();
 		q.pop();
-		if (v[i]!=NULL)
+		if (v[i]!= INT_MAX)
 			n->left = new TreeNode(v[i]);
-		if (v[i+1] != NULL)
+		if (v[i+1] != INT_MAX)
 			n->right = new TreeNode(v[i + 1]);
 		if (n->left != NULL)
 			q.push(n->left);
@@ -369,6 +376,125 @@ int* Tree_Solution::binaryTreeOrderDetails(TreeNode* node, int& result)
 	result = max(returnResult[0] + returnResult[2] - 1, result);
 	return returnResult;
 }
+
+void  Tree_Solution::splitBST()
+{
+	vector<TreeValue> values = { {4,2,6},{2,1,3},{6,5,7} };
+	TreeNode* n = Create(values);
+	vector<TreeNode*> result = splitBSTDetails(n, 2);
+	print2DUtil(result[0],4);
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	print2DUtil(result[1], 4);
+
+}
+
+vector<TreeNode*> Tree_Solution::splitBSTDetails(TreeNode* root, int n)
+{
+	if (root == NULL)
+		return vector<TreeNode*>{NULL, NULL};
+
+	if (root->val <= n)
+	{
+		vector<TreeNode*> children = splitBSTDetails(root->right, n);
+	
+		vector<TreeNode*> result;
+		root->right = children[0];
+		result.push_back(root);
+		result.push_back(children[1]);
+		return result;
+	}
+	else
+	{
+		vector<TreeNode*> children = splitBSTDetails(root->left, n);
+
+		vector<TreeNode*> result;
+		root->left = children[1];
+		result.push_back(children[0]);
+		result.push_back(root);
+		return result;
+	}
+}
+
+
+void Tree_Solution::constructFromPrePost()
+{
+	vector<int> pre{ 1,2,4,5,3,6,7 };
+	vector<int> post{ 4, 5, 2, 6, 7, 3, 1 };
+	TreeNode *treenode=constructFromPrePostDetails(pre, post);
+	print2DUtil(treenode, 4);
+}
+
+TreeNode* Tree_Solution::constructFromPrePostDetails(vector<int> pre, vector<int> post)
+{
+	int N = pre.size();
+	if (N == 0) return NULL;
+
+	TreeNode* root = new TreeNode(pre[0]);
+	if (N == 1) return root;
+
+
+	int L = 0;
+	for (int i = 0; i < N; ++i)
+		if (post[i] == pre[1])
+			L = i + 1;
+
+	vector<int> left1(pre.begin()+1, pre.begin()+L+1);
+	vector<int> left2(post.begin(), post.begin()+L);
+	root->left = constructFromPrePostDetails(left1, left2);
+
+
+	vector<int> right1(pre.begin()+L+1, pre.begin()+N);
+	vector<int> right2(post.begin()+L, post.begin()+N-1);
+	root->right = constructFromPrePostDetails(right1, right2);
+
+	return root;
+}
+
+void Tree_Solution::allPossibleFBT()
+{
+	int n = 7;
+	unordered_map<int, int> cached;
+	cached[1]=1;
+	cout << allPossibleFBTDetails(n, cached);
+}
+
+int Tree_Solution::allPossibleFBTDetails(int n,  unordered_map<int,int>& cached)
+{
+	if (cached.count(n) > 0)
+		return cached[n];
+
+	int total = 0;
+	for (int i = 1; i < n - 1; i+= 2)
+		total += allPossibleFBTDetails(i, cached)*allPossibleFBTDetails(n - 1 - i, cached);
+
+	cached[n] = total;
+	return total;
+}
+
+void Tree_Solution::distributeCoins()
+{
+	vector<int> input{ 1, 0, 0, INT_MAX, 3 };
+	TreeNode* root = createTree(input);
+	int times = 0;
+	int result=distributeCoinsDetails(root, times);
+	cout << times + result;
+}
+
+int Tree_Solution::distributeCoinsDetails(TreeNode* node, int& times)
+{
+	if (node == NULL)
+		return 0;
+	int leftTimes = distributeCoinsDetails(node->left, times);
+	int rightTimes= distributeCoinsDetails(node->right, times);
+	times += abs(leftTimes) + abs(rightTimes);
+
+	return leftTimes + rightTimes + node->val- 1;
+}
+
+
 
 
 

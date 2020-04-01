@@ -56,6 +56,20 @@ public:
 	void binaryTreeOrder();
 	int* binaryTreeOrderDetails(TreeNode* node, int& result);
 
+	//leetcode SeperateIntoTwoTrees
+	//leetcode 776
+	void splitBST();
+	vector<TreeNode*> splitBSTDetails(TreeNode* root, int n);
 
+	//leetcode 889
+	void constructFromPrePost();
+	TreeNode* constructFromPrePostDetails(vector<int> pre, vector<int> post);
 
+	//leetcode 894
+	void allPossibleFBT();
+	int allPossibleFBTDetails(int n, unordered_map<int, int>& cached);
+
+	//leetcode 973
+	void distributeCoins();
+	int distributeCoinsDetails(TreeNode* node, int& times);
 };

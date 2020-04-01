@@ -21,7 +21,9 @@ Graph GraphSolution::init()
 void  GraphSolution::test()
 {
 	//topOrder();
-	shortestPath();
+	//shortestPath();
+
+	graphColoring();
 }
 
 bool GraphSolution::isCircled()
@@ -213,3 +215,48 @@ void GraphSolution::shortestPath()
 
 }
 
+void GraphSolution::graphColoring()
+{
+	bool graph[4][4] = 
+  { { 0, 1, 1, 1 },
+	{ 1, 0, 1, 0 },
+	{ 1, 1, 0, 1 },
+	{ 1, 0, 1, 0 },
+	};
+	int m = 4; // Number of colors
+
+	int color[4];
+	for (int i = 0; i < 4; i++)
+		color[i] = 0;
+	graphColoringDetails(graph, m, color, 0);
+
+}
+
+void GraphSolution::graphColoringDetails(bool graph[4][4], int m, int color[], int v)
+{
+	if (v == 4)
+	{
+		for (int i = 0; i < 4; i++)
+			cout << color[i] << " ";
+		cout << endl;
+		return;
+	}
+
+	for (int c = 1; c <= m; c++)
+	{
+		bool isSafe=true;
+		for (int i = 0; i < 4; i++)
+			if (graph[v][i] && c == color[i])
+				isSafe= false;
+
+		/* 检查颜色C到V的分配是否正确*/
+		if (isSafe)
+		{
+			color[v] = c;
+			/* 递归为其余顶点指定颜色 */
+			graphColoringDetails(graph, m, color, v + 1);
+			/* 如果指定颜色C不会导致解决方案然后删除它 */
+			color[v] = 0;
+		}
+	}
+}

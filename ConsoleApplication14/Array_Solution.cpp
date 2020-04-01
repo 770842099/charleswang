@@ -17,7 +17,9 @@ void Array_Solution::test()
 
 	//totalSum();
 
-	containsSubString();
+	//containsSubString();
+
+	minFlipsMonoIncr();
 }
 
 void Array_Solution::kthLargerNumber()
@@ -361,4 +363,49 @@ void Array_Solution::containsSubString()
 	}
 	cout << count;
 
+}
+
+void Array_Solution::duplicatedOrder()
+{
+	vector<vector<int>> overlaps;
+	
+	vector<vector<int>> datas{ {10, 20 },{50, 60 },{10, 40 },{5, 15 },{5, 10 },{25, 55 } };
+
+	for (vector<int> data:datas)
+	{
+		for (vector<int> iv : overlaps) {
+			if (iv[0] < data[1] && data[0] < iv[1]) cout << false;
+		}
+		for (vector<int> iv : overlaps) {
+			if (iv[0] < data[1] && data[0] < iv[1])
+				overlaps.emplace_back(max(data[0], iv[0]), min(data[1], iv[1]));
+		}
+		cout << true;
+	}
+}
+
+void Array_Solution::minFlipsMonoIncr()
+{
+	string s = "00110";
+	vector<int> pre0(s.size());
+	vector<int> suffix1(s.size());
+	pre0[0] = s[0] != '0';
+	for (int i = 1; i < s.size(); i++)
+	{
+		pre0[i] = pre0[i - 1] + (s[i] != '0');
+	}
+
+	suffix1[s.size() - 1] = s[s.size() - 1] != '1';
+	for (int i = s.size()-2; i>=0; i--)
+	{
+		suffix1[i] = suffix1[i + 1] + (s[i] != '1');
+	}
+
+	int less = 9999;
+	for (int i = 0; i < s.size()-1; i++)
+	{
+		less = min(pre0[i] + suffix1[i + 1], less);
+	}
+	less = min(less, pre0[s.size() - 1]);
+	cout << less;
 }

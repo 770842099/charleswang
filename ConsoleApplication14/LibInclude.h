@@ -16,6 +16,7 @@
 #include <queue>
 #include "linked_list.h"
 #include "TrieTree.h"
+#include <cmath>
 //#include <list>
 using namespace std;
 

@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Array_Solution.cpp" />
+    <ClCompile Include="BFS_Solution.cpp" />
     <ClCompile Include="Bit_Solution.cpp" />
     <ClCompile Include="ConsoleApplication14.cpp" />
     <ClCompile Include="DFS_Solution.cpp" />
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array_Solution.h" />
+    <ClInclude Include="BFS_Solution.h" />
     <ClInclude Include="Bit_Solution.h" />
     <ClInclude Include="DFS_Solution.h" />
     <ClInclude Include="DP_Solution.h" />
