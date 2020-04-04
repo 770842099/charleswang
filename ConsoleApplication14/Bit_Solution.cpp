@@ -3,7 +3,8 @@
 
 void Bit_Solution::test()
 {
-	AllCombition();
+	//AllCombition();
+	countTriplets();
 }
 
 void Bit_Solution::AllCombition()
@@ -21,5 +22,27 @@ void Bit_Solution::AllCombition()
 		}
 		cout << endl;
 	}
+}
+
+void Bit_Solution::countTriplets()
+{
+	vector<int> s {2,1,3};
+	vector<int> cache(1 << 16,0);
+	for (int i=0;i<s.size();i++)
+		for (int j = 0; j < s.size(); j++)
+		{
+			cache[s[i]&s[j]]++;
+		}
+
+	int total = 0;
+	for (int i = 0; i < s.size(); i++)
+	{
+		for (int j = 0; j < (1 << 16); j++)
+		{
+			if (cache[j] > 0 && (j&s[i]) == 0)
+				total += cache[j];
+		}
+	}
+	cout << total;
 
 }

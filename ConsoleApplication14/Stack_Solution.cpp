@@ -4,7 +4,8 @@ void Stack_Solution::test()
 {
 	//removeNToSmallest();
 	//stockSpanner();
-	sumSubarrayMins();
+	//sumSubarrayMins();
+	validSubarrays();
 }
 
 void Stack_Solution::removeNToSmallest()
@@ -149,4 +150,39 @@ void Stack_Solution::sumSubarrayMins()
 	}
 	
 }
+
+void Stack_Solution::validSubarrays()
+{
+	vector<int> input = { 1,4,2,5,3 };
+	stack<pair<int, int>> s;
+	int count = 0;
+	for (int i = 0; i < input.size(); i++)
+	{
+		while (!s.empty())
+		{
+			if (input[i] < s.top().first)
+			{
+				count += i - s.top().second;
+				s.pop();
+			}
+			else
+			{
+				s.emplace(input[i], i);
+				break;
+			}
+		}
+		if (s.empty())
+		{
+			s.emplace(input[i], i);
+		}
+	}
+	
+	while (!s.empty())
+	{
+		count += input.size() - s.top().second;
+		s.pop();
+	}
+	cout << count;
+}
+
 

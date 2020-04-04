@@ -25,5 +25,8 @@ public:
 
 	//leetcode 471
 	void shortenString();
+
+	//leetcode 1024
+	void camelMatch();
 };
 

@@ -4,7 +4,9 @@
 void Number_Solution::test()
 {
 	//allPossibleFactor();
-	nextBigNumber();
+	//nextBigNumber();
+
+	numberOf2sInRange();
 }
 
 
@@ -62,5 +64,37 @@ void Number_Solution::nextBigNumber()
 	for (int i = first + 1, k = s.size() - 1; i < k; i++, k--)
 		swap(s[i], s[k]);
 	cout << s;
+}
+
+void Number_Solution::numberOf2sInRange()
+{
+	int n = 25;
+	//last decimal times of 2
+
+	int tempN = n;
+	int factor = 0;
+	while (tempN > 0)
+	{
+		tempN /= 10;
+		factor++;
+	}
+
+	int total = 0;
+	for (int i = 1; i <= factor; i++)
+	{
+		total += n / pow(10,i);
+		int remaining;
+		int k = pow(10, i);
+
+		remaining = n % k;
+		if (remaining > 3 * pow(10, i - 1))
+			total += 1 * pow(10, i - 1);
+		else if (remaining > -2 * pow(10, i - 1))
+		{
+			total += remaining - 2 * pow(10, i - 1) + 1;
+		}
+	}
+
+	cout << total;
 }
 

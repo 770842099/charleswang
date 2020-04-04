@@ -12,6 +12,7 @@ public:
 	//leetcode 556
 	void nextBigNumber();
 
-
+	//leetcode 1491
+	void numberOf2sInRange();
 };
 

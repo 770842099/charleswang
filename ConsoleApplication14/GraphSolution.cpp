@@ -23,7 +23,9 @@ void  GraphSolution::test()
 	//topOrder();
 	//shortestPath();
 
-	graphColoring();
+	//graphColoring();
+
+	leadsToDestination();
 }
 
 bool GraphSolution::isCircled()
@@ -260,3 +262,53 @@ void GraphSolution::graphColoringDetails(bool graph[4][4], int m, int color[], i
 		}
 	}
 }
+
+void GraphSolution::leadsToDestination()
+{
+	int n = 4, source = 0, destination = 3;
+	vector<vector<int>> edges = { {0, 1},{0, 3}, {1, 2}, {2, 1} };
+	
+	vector<vector<int>> output(n,vector<int>());
+	for (vector<int> v : edges)
+	{
+		output[v[0]].push_back(v[1]);
+	}
+
+	vector<bool> visited(n, false);
+
+	queue<int> q;
+	q.push(source);
+	visited[source] = true;
+
+	bool matched = true;
+	while (!q.empty() && matched)
+	{
+		int node = q.front();
+		q.pop();
+
+		if (output[node].size() == 0 && node != destination)
+		{
+			matched = false;
+			break;
+		}
+
+		for (int next:output[node])
+		{
+			if (visited[next])
+			{
+				matched = false;
+				break;
+			}
+			else
+			{
+				q.push(next);
+				visited[next] = true;
+			}
+		}
+	}
+	cout << matched;
+}
+
+
+
+

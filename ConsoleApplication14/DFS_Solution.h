@@ -12,5 +12,30 @@ public:
 
 	//leetcode 638
 
+
+	//leetcode 1000
+	void mergeStones();
+	int mergeStonesDetails(vector<int> input, int start, int end, int k, vector<vector<int>>& dp, vector<int>& sum);
+
+	void mergeStonesSplits(int start, int end, int k,int index, vector<int> split, vector<vector<int>>& splits);
+
+
+	//leetcode 1125
+	void smallestSufficientTeam();
 };
+
+struct DFS_Solution_smallestSufficientTeam
+{
+	int skills;
+	int peoples;
+	vector<int> peopleNum;
+
+	DFS_Solution_smallestSufficientTeam(int _skills, int _people, vector<int> _peopleNum)
+	{
+		skills = _skills;
+		peoples = _people;
+		peopleNum = _peopleNum;
+	}
+};
+
 

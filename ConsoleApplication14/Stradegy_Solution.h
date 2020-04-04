@@ -11,5 +11,11 @@ public :
 
 	//leetcode 837
 	void rate21();
+
+	//leetcode 1029
+	void twoCitySchedCost();
+
+	//leetcode 1066
+	void assignBikes();
 };
 

@@ -13,7 +13,9 @@ void string_solution::run()
 	//xiumStringContainsK();
 
 	//shortestPath();
-	shortenString();
+	//shortenString();
+
+	camelMatch();
 }
 
 
@@ -369,6 +371,40 @@ void string_solution::shortenString()
 		}
 	}
 	cout<< d[0][s.size() - 1];
+}
+
+void string_solution::camelMatch()
+{
+	vector<string> s{ "FooBar", "FooBarTest", "FootBall", "FrameBuffer", "ForceFeedBack" };
+	string pattern = "FB";
+
+	string temp = "FooBarTest";
+	int i = 0, j = 0;
+	vector<bool> removed(temp.size(), false);
+	while (i < temp.size() && j < pattern.size())
+	{
+		if (temp[i] == pattern[j])
+		{
+			removed[i] = true;
+			i++;
+			j++;
+		}
+		else
+		{
+			i++;
+		}
+	}
+	bool result = true;
+	for (int i = 0; i < temp.size(); i++)
+	{
+		if (!removed[i] && temp[i] >= 'A' && temp[i] <= 'Z')
+		{
+			result = false;
+			break;
+		}
+	}
+
+	cout << result;
 }
 
 

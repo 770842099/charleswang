@@ -27,5 +27,7 @@ public:
 	void graphColoring();
 	void graphColoringDetails(bool graph[4][4], int m, int color[], int v);
 
+	//leetcode 1059
+	void leadsToDestination();
 };
 

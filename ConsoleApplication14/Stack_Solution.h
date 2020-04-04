@@ -13,5 +13,8 @@ public:
 
 	//leetcode 907
 	void sumSubarrayMins();
+
+	//leetcode 1063
+	void validSubarrays();
 };
 

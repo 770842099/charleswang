@@ -189,7 +189,10 @@ int Tree_Solution::NLParse2(string s, int start, int end)
 			}
 		}
 	}
-	return height+1;
+	if (height == -1)
+		return -1;
+	else
+		return height+1;
 }
 
 

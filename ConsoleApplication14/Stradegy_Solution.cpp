@@ -5,8 +5,13 @@
 void Stradegy_Solution::test()
 {
 	//transfer();
-	rate21();
+	//rate21();
+
+	//twoCitySchedCost();
+
+	assignBikes();
 }
+
 
 //leetcode 294
 void Stradegy_Solution::transfer()
@@ -57,4 +62,76 @@ void Stradegy_Solution::rate21()
 		sum += dp[j];
 	}
 	cout << 1 - sum;
+}
+
+void Stradegy_Solution::twoCitySchedCost()
+{
+	vector<vector<int>> input = { {10, 20}, {30, 200}, {400, 50},{30, 20}};
+	vector<vector<int>> diff;
+	for (int i = 0; i < input.size(); i++)
+	{		
+		diff.emplace_back(vector<int>{input[i][1] - input[i][0], i});
+	}
+	sort(diff.begin(), diff.end(), [](const vector<int>& a, const vector<int>& b) {
+		return a[0]>b[0];
+	});
+
+	int sum = 0;
+	for (int i = 0; i < input.size(); i++)
+		sum += input[i][1];
+	for (int i = 0; i < diff.size() / 2; i++)
+		sum -= diff[i][0];
+	cout << sum;
+}
+
+void Stradegy_Solution::assignBikes()
+{
+	//vector<vector<int>> workers = { {0, 0}, {1, 1}, {2, 0} }, bikes = { {1, 0}, {2, 2}, {2, 1}};
+
+	vector<vector<int>> workers = { {0, 0}, {1, 1}, {2, 0},{3, 0}, {4, 1}, {2, 2},{-1, 0}, {1, 3}, {-2, 0} }, 
+		bikes = { {1, 0}, {2, 2}, {2, 1},{1, 0}, {2, 2}, {2, 1},{1, 0}, {2, 2}, {2, 1} };
+	int n = workers.size();
+	vector<int> dp(1 << n, 10000000);
+
+	vector<vector<int>> distance(n, vector<int>(n, 0));
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			distance[i][j] = abs(workers[i][0] - bikes[j][0]) + abs(workers[i][1] - bikes[j][1]);
+		}
+	}
+
+	queue<pair<int, int>> q;
+	for (int i = 0; i < n; i++)
+	{
+		q.emplace(1 << i, distance[0][i]);
+		dp[1 << i] = distance[0][i];
+	}
+
+	int workerNum = 1;
+	while (!q.empty() && workerNum<n)
+	{
+		queue<pair<int, int>>qtemp;
+		while (!q.empty())
+		{
+			pair<int, int> p = q.front();
+			q.pop();
+			for (int i = 0; i < n; i++)
+			{
+				if (!(p.first & 1 << i))
+				{
+					int r = p.first | 1 << i;
+					if (p.second + distance[workerNum][i] < dp[r])
+					{
+						dp[r] = p.second + distance[workerNum][i];
+						qtemp.emplace(r, dp[r]);
+					}
+				}
+			}
+		}
+		q = qtemp;
+		workerNum++;
+	}
+	cout << dp[(1 << n) - 1];
 }

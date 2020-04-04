@@ -160,6 +160,7 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphSolution.cpp" />
     <ClCompile Include="Greedy_Solution.cpp" />
+    <ClCompile Include="LinkedList_Solution.cpp" />
     <ClCompile Include="linked_list.cpp" />
     <ClCompile Include="linked_list.h" />
     <ClCompile Include="Map_Solution.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="GraphSolution.h" />
     <ClInclude Include="Greedy_Solution.h" />
     <ClInclude Include="LibInclude.h" />
+    <ClInclude Include="LinkedList_Solution.h" />
     <ClInclude Include="Map_Solution.h" />
     <ClInclude Include="Number_Solution.h" />
     <ClInclude Include="Puzzle_Solution.h" />
