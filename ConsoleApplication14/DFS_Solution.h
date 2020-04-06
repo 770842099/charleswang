@@ -19,9 +19,13 @@ public:
 
 	void mergeStonesSplits(int start, int end, int k,int index, vector<int> split, vector<vector<int>>& splits);
 
-
 	//leetcode 1125
 	void smallestSufficientTeam();
+
+	//leetcode 1187
+	void makeArrayIncreasing();
+	void makeArrayIncreasingDetail(vector<int>& input, vector<int>& arr2, int index, int lastValue, int times, int& minTimes);
+
 };
 
 struct DFS_Solution_smallestSufficientTeam

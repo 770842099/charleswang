@@ -28,5 +28,10 @@ public:
 
 	//leetcode 1024
 	void camelMatch();
+
+	//leetcode 1190
+	void reverseParentheses();
+	void reverseParentheses_startToend(string& s, int start, int end, vector<char>& vs);
+	void reverseParentheses_endTostart(string& s, int start, int end, vector<char>& vs);
 };
 

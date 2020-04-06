@@ -17,5 +17,16 @@ public :
 
 	//leetcode 1066
 	void assignBikes();
+
+	//leetcode 1288
+	void removeCoveredIntervals();
+
+	//leetcode 1326
+	void minTaps();
+
+	//leetcode 1353
+	void maxEvents();
+
+	void fireBomb();
 };
 

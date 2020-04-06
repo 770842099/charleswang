@@ -39,5 +39,12 @@ public:
 
 	//leetcode 926
 	void minFlipsMonoIncr();
+
+	//leetcode 1224
+	void maxEqualFreq();
+
+	//leetcode 1297
+	void maxFreq();
+
 };
 

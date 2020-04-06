@@ -28,7 +28,12 @@ void DP_Solution::test()
 	//numMusicPlaylists();
 
 	//distinctSubseqII();
-	tallestBillboard();
+	//tallestBillboard();
+
+	//maximumSum();
+
+	//isValidPalindrome();
+	probabilityOfHeads();
 }
 
 #define CARS 7
@@ -553,6 +558,82 @@ void DP_Solution::tallestBillboard()
 	cout << dp[data.size()][0];
 }
 
+void DP_Solution::maximumSum()
+{
+	vector<int> input = { 1, -2, 0, 3 };
+	vector<vector<int>> dp(input.size() + 1, vector<int> (2));
+	dp[0][0] = -999999;
+	dp[0][1] = -999999;
+	for (int i = 1; i <= input.size(); i++)
+	{
+		dp[i][0] = max(dp[i - 1][0] + input[i - 1], input[i - 1]);
+		dp[i][1] = max(dp[i - 1][1] + input[i - 1], dp[i - 1][0]);
+	}
+	cout << max(dp[input.size()][0], dp[input.size()][1]);
+}
+
+void DP_Solution::isValidPalindrome()
+{
+	string s = "abcdeca";
+    int	k = 2;
+
+	vector<vector<int>> dp(s.size(), vector<int>(s.size(), 1));
+	for (int length = 2; length <= s.size(); length++)
+	{
+		for (int i = 0; i < s.size(); i++)
+		{
+			if (i + length - 1 >= s.size())
+				continue;
+			
+			if (s[i] == s[i + length - 1])
+			{
+				if (length == 2)
+				{
+					dp[i][i + length - 1] = 2;
+				}
+				else
+				{
+					dp[i][i + length - 1] = dp[i + 1][i + length - 2] + 2;
+				}
+			}
+			else
+			{
+				dp[i][i + length - 1] = max(dp[i][i + length - 2], dp[i + 1][i + length - 1]);
+			}
+		}
+	}
+	cout << dp[0][s.size() - 1] << endl;
+	cout << ((s.size() - dp[0][s.size() - 1])<=k);
+}
+
+void DP_Solution::probabilityOfHeads()
+{
+	vector<float> rate = { 0.4, 0.2};
+	int target = 1;
+
+	vector<vector<float>> dp(rate.size() + 1, vector<float>(target + 1, 0));
+
+	for (int j = 0; j <= target; j++)
+	{
+		dp[0][j] = 1;
+	}
+
+	for (int i = 1; i <= rate.size(); i++)
+	{
+		for (int j = 0; j <= target; j++)
+		{
+			if (j > 0)
+			{
+				dp[i][j] += dp[i - 1][j - 1] * rate[i - 1];
+			}
+			if (i - 1 >= j)
+			{
+				dp[i][j] += dp[i - 1][j] * (1 - rate[i - 1]);
+			}
+		}
+	}
+	cout << dp[rate.size()][target];
+}
 
 
 

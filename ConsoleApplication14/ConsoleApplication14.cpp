@@ -376,14 +376,14 @@ int main()
 	//Recursive_Solution s;
 	//s.test();
 
-    //DP_Solution dp;
+   // DP_Solution dp;
     //dp.test();
 
 	//Puzzle_Solution puzzle;
 	//puzzle.test();
 
-	DFS_Solution dfs;
-	dfs.test();
+	//DFS_Solution dfs;
+	//dfs.test();
 
 	//Bit_Solution s;
 	//s.test();
@@ -401,8 +401,8 @@ int main()
 	//Number_Solution s;
 	//s.test();
 
-	//Stradegy_Solution s;
-	//s.test();
+	Stradegy_Solution s;
+	s.test();
 
 	//Map_Solution map;
 	//map.test();

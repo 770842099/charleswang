@@ -51,6 +51,14 @@ public:
 	//leetcode 956
 	void tallestBillboard();
 
+	//leetcode 1186
+	void maximumSum();
+
+	//leetcode 1216
+	void isValidPalindrome();
+
+	//leetcode 1230
+	void probabilityOfHeads();
 };
 
 

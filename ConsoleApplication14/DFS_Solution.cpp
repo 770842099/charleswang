@@ -6,7 +6,8 @@ void DFS_Solution::test()
 	//go2DMaxtirx();
 	//mergeStones();
 
-	smallestSufficientTeam();
+	//smallestSufficientTeam();
+	makeArrayIncreasing();
 }
 
 
@@ -235,4 +236,33 @@ void DFS_Solution::smallestSufficientTeam()
 
 	for (int &i : minNums[req_flags])
 		cout << i << " ";
+}
+
+void DFS_Solution::makeArrayIncreasing()
+{
+	vector<int> input = { 1, 5, 3, 6, 7 }, arr2 = { 1, 3, 2, 4 };
+	sort(arr2.begin(), arr2.end());
+	int minTimes = 100000;
+	makeArrayIncreasingDetail(input, arr2, 1, input[0], 0, minTimes);
+	makeArrayIncreasingDetail(input, arr2, 1, arr2[0], 1, minTimes);
+	cout << minTimes;
+}
+
+void DFS_Solution::makeArrayIncreasingDetail(vector<int>& input, vector<int>& arr2, int index, int lastValue, int times, int& minTimes)
+{
+	if (index == input.size() - 1)
+	{
+		minTimes = min(minTimes, times);
+		return;
+	}
+	
+	if (input[index] > lastValue)
+	{
+		makeArrayIncreasingDetail(input, arr2, index+1, input[index], times, minTimes);
+	}
+
+	int l = upper_bound(arr2.begin(), arr2.end(), lastValue) - arr2.begin();
+	if (l < arr2.size())
+		makeArrayIncreasingDetail(input, arr2, index + 1, arr2[l], times+1, minTimes);
+
 }

@@ -15,7 +15,8 @@ void string_solution::run()
 	//shortestPath();
 	//shortenString();
 
-	camelMatch();
+	//camelMatch();
+	reverseParentheses();
 }
 
 
@@ -405,6 +406,67 @@ void string_solution::camelMatch()
 	}
 
 	cout << result;
+}
+
+void string_solution::reverseParentheses()
+{
+	string s = "a(bcdefghijkl(mno)p)q";
+	vector<char> vs;
+	reverseParentheses_startToend(s, 0, s.size() - 1,vs);
+	for (char& c : vs)
+	{
+		cout << c;
+	}
+}
+
+
+void string_solution::reverseParentheses_startToend(string& s, int start, int end, vector<char>& vs)
+{
+	while (start <=end)
+	{
+		if (s[start] != '(')
+			vs.push_back(s[start]);
+		else
+		{
+			int sbegin = start + 1;
+			int balance = 1;
+			do
+			{
+				start++;
+				if (s[start] == '(')
+					balance++;
+				else if (s[start] == ')')
+					balance--;
+			} while (balance != 0);
+			reverseParentheses_endTostart(s, sbegin, start-1, vs);
+		}
+
+		start++;
+	}
+}
+void string_solution::reverseParentheses_endTostart(string& s, int start, int end, vector<char>& vs)
+{
+	while (start <= end)
+	{
+		if (s[end] != ')')
+			vs.push_back(s[end]);
+		else
+		{
+			int balance = 1;
+			int send = end - 1;
+			do
+			{
+				end--;
+				if (s[end] == '(')
+					balance--;
+				else if (s[end] == ')')
+					balance++;
+			} while (balance != 0);
+			reverseParentheses_startToend(s, end+1, send, vs);
+		}
+
+		end--;
+	}
 }
 
 

@@ -9,7 +9,14 @@ void Stradegy_Solution::test()
 
 	//twoCitySchedCost();
 
-	assignBikes();
+	//assignBikes();
+
+	//removeCoveredIntervals();
+
+	//minTaps();
+	//maxEvents();
+
+	fireBomb();
 }
 
 
@@ -134,4 +141,119 @@ void Stradegy_Solution::assignBikes()
 		workerNum++;
 	}
 	cout << dp[(1 << n) - 1];
+}
+
+void Stradegy_Solution::removeCoveredIntervals()
+{
+	vector<pair<int, int>> input = {{1,4},{3,6},{2,8}};
+	sort(input.begin(), input.end(), [](const pair<int,int>&a, const pair<int,int>&b) {
+		return a.first < b.first;
+	});
+
+	int maxRight = input[0].first;
+	for (int i = 1; i < input.size(); i++)
+	{
+		if (input[i].second <= maxRight)
+			cout << input[i].first << " " << input[i].second << endl;
+
+		if (input[i].second > maxRight)
+			maxRight = input[i].second;
+	}
+}
+
+void Stradegy_Solution::minTaps()
+{
+	int n = 5;
+	vector<int> input = { 3, 4, 1, 1, 0, 0 };
+
+	vector<vector<int>> ranges;
+	for (int i = 0; i < input.size(); i++)
+	{
+		vector<int> v{ i - input[i], i + input[i], i };
+		ranges.emplace_back(v);
+	}
+	sort(ranges.begin(), ranges.end(), [](const vector<int>&a, const vector<int>&b) {
+		return a[0] < b[0];
+	});
+
+	int minRange = 0;
+	int i = 0;
+	int maxRange = -1;
+	int maxIndex = -1;
+	vector<int> mins;
+	while (true)
+	{
+		int num = 0;
+		while (i <ranges.size() && (ranges[i][0]<= minRange))
+		{
+			if (ranges[i][1] >= maxRange)
+			{
+				maxRange = ranges[i][1];
+				maxIndex = ranges[i][2];
+			}	
+			num++;
+			i++;
+		}
+		
+		if (num == 0)
+		{
+			cout << "unable" << endl;
+			break;
+		}
+		
+		mins.push_back(maxIndex);
+		minRange = maxRange;
+		if (minRange >= input.size() - 1)
+			break;
+	}
+	for (int&i : mins)
+	{
+		cout << i << " ";
+	}
+}
+
+void Stradegy_Solution::maxEvents()
+{
+	vector<vector<int>> events = { {1, 4}, {4, 4}, {2, 2}, {3, 4}, {1, 1} };
+	unordered_set<int> visited;
+	
+	sort(events.begin(), events.end(), [](vector<int>& a, vector<int>& b) {
+		return (a[0] < b[0]) || (a[0] == b[0] && a[1] < b[1]);
+	});
+
+	for (int i = 0; i < events.size(); i++)
+	{
+		for (int j = events[i][0]; j <= events[i][1]; j++)
+		{
+			if (!visited.count(j))
+			{
+				visited.insert(j);
+				continue;
+			}
+		}
+	}
+	cout << visited.size();
+}
+
+void Stradegy_Solution::fireBomb()
+{
+	vector<int> input{ 10,3,5, 4, 3, 8, 9 };
+	multiset<int> set;
+
+	int count = 0;
+	for (int i = 0; i < input.size(); i++)
+	{
+		std::multiset<int>::iterator iter=set.lower_bound(input[i]);
+		if (iter == set.end())
+		{
+			count++;
+			set.insert(input[i]);
+		}
+		else
+		{
+			set.erase(iter);
+			set.insert(input[i]);
+		}
+	}
+	cout << count;
 }

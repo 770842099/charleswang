@@ -19,7 +19,10 @@ void Array_Solution::test()
 
 	//containsSubString();
 
-	minFlipsMonoIncr();
+	//minFlipsMonoIncr();
+
+	//maxEqualFreq();
+	maxFreq();
 }
 
 void Array_Solution::kthLargerNumber()
@@ -408,4 +411,94 @@ void Array_Solution::minFlipsMonoIncr()
 	}
 	less = min(less, pre0[s.size() - 1]);
 	cout << less;
+}
+
+void Array_Solution::maxEqualFreq()
+{
+	vector<int> nums = { 2, 2, 1, 1, 5, 3, 3, 5, 6 };
+	vector<int> cnt(100001, 0), fre(100001, 0);    //cnt计算数字出现的频率，fre[i]=j表示有j个数字频率为i
+	int maxcnt = 0, ans = 0;
+	for (int i = 0; i < nums.size(); ++i) {
+		int num = nums[i];
+		++cnt[num];
+		++fre[cnt[num]];
+		maxcnt = max(maxcnt, cnt[num]);
+		//第一、四种情况 || 第二种情况 （i+1就是目前的前缀数组长度）
+		if ((fre[maxcnt] == 1 && 1 + fre[maxcnt - 1] * (maxcnt - 1) == i + 1) || (fre[maxcnt] * maxcnt + 1 == i + 1))
+			ans = i + 1;
+	}
+	if (maxcnt == 1)   //第三种情况
+	{
+		cout << nums.size();
+		return;
+	}
+	cout << ans;
+}
+
+void Array_Solution::maxFreq()
+{
+	string s = "aababcaab";
+	int maxLetters = 2, minSize = 3, maxSize = 4;
+	unordered_map<string, int> map;
+
+	for (int l = minSize; l <= maxSize; l++)
+	{
+		int totalLetters = 0;
+		vector<int> letterNum(26, 0);
+
+		int totalLength = 0;
+
+		if (s.size() < l)
+			continue;
+
+		for (int i = 0; i < l; i++)
+		{
+			if (letterNum[s[i] - 'a'] == 0)
+			{
+				totalLetters++;
+			}
+			letterNum[s[i] - 'a']++;
+		}
+		if (totalLetters <= maxLetters)
+		{
+			string letter = s.substr(0, l);
+			if (map.count(letter))
+				map[letter]++;
+			else
+				map[letter] = 1;
+		}
+
+
+		for (int i = l; i < s.size(); i++)
+		{
+			if (letterNum[s[i] - 'a'] == 0)
+			{
+				totalLetters++;
+			}
+			letterNum[s[i] - 'a']++;
+			if (letterNum[s[i - l] - 'a'] == 1)
+			{
+				totalLetters--;
+			}
+			letterNum[s[i - l] - 'a']--;
+			if (totalLetters <= maxLetters)
+			{
+				string letter = s.substr(i-l+1, l);
+				if (map.count(letter))
+					map[letter]++;
+				else
+					map[letter] = 1;
+			}
+		}
+	}
+
+	string mostStr="";
+	int mostNum=0;
+	for (pair<string, int> v : map)
+	{
+		if (v.second > mostNum)
+			mostStr = v.first;
+	}
+	cout << mostStr << endl;
+	cout << mostNum << endl;
 }

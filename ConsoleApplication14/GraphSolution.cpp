@@ -25,7 +25,12 @@ void  GraphSolution::test()
 
 	//graphColoring();
 
-	leadsToDestination();
+	//leadsToDestination();
+	//minCostToSupplyWater();
+
+	//criticalConnections();
+	//findTheCity();
+	dijkstra();
 }
 
 bool GraphSolution::isCircled()
@@ -307,6 +312,199 @@ void GraphSolution::leadsToDestination()
 		}
 	}
 	cout << matched;
+}
+
+void GraphSolution::minCostToSupplyWater()
+{
+	int n = 3;
+	vector<int> wells = { 1, 2, 2 };
+	vector<vector<int>>	pipes = {{1, 2, 1}, {2, 3, 1} };
+
+	vector<vector<pair<int,int>>> output(wells.size()+1, vector<pair<int,int>>());
+	for (vector<int>& v : pipes)
+	{
+		output[v[0]].emplace_back(v[1], v[2]);
+	}
+
+	vector<int> shortestPath(wells.size()+1,INT32_MAX/4);
+	
+	queue<pair<int, int>> q;
+	for (int i = 0; i < wells.size(); i++)
+	{
+		q.emplace(i+1, wells[i]);
+		shortestPath[i+1] = wells[i];
+	}
+
+	while (!q.empty())
+	{
+		queue<pair<int, int>> qtemp;
+		while (!q.empty())
+		{
+			pair<int, int> info = q.front();
+			q.pop();
+			int node = info.first;
+			int value = info.second;
+
+			for (pair<int, int> adj : output[node])
+			{
+				if (adj.second < shortestPath[adj.first])
+				{
+					shortestPath[adj.first] = adj.second;
+				    qtemp.emplace(adj.first, adj.second);
+				}
+			}
+		}
+		q = qtemp;
+	}
+
+	int sum = 0;
+	for (int i = 1; i <= wells.size(); i++)
+	{
+		sum += shortestPath[i];
+	}
+	cout << sum;
+}
+
+void GraphSolution::criticalConnections()
+{
+	int n = 4;
+	vector<vector<int>> connections = { {0, 1},{1, 2},{2, 0},{1, 3} };
+
+	vector<vector<int>> graph = vector<vector<int>>(n);
+	vector<int> visited = vector<int>(n, 0);
+	vector<int> visitTime = vector<int>(n, 0);
+	vector<int> Highestparent = vector<int>(n, 0);
+	vector<vector<int>> ans = vector<vector<int>>();
+
+	for (int i = 0; i < connections.size(); i++)
+	{
+		graph[connections[i][0]].push_back(connections[i][1]);
+		graph[connections[i][1]].push_back(connections[i][0]);
+	}
+	int clock = 0;
+	criticalConnectionsDetails(0, -1, clock, graph, visited, visitTime, Highestparent, ans);
+	for (vector<int> i : ans)
+	{
+		cout << i[0] << ',' << i[1] << endl;
+	}
+}
+
+int GraphSolution::criticalConnectionsDetails(int node, int parent, int &clock,
+	vector<vector<int>>& graph, vector<int>& visited, vector<int>& visitTime,
+	vector<int>& Highestparent, vector<vector<int>>& ans)
+{
+	visited[node] = 1;
+
+	// 设置 节点的访问时间 并初始化该节点能访问到的最早祖先为该节点自己
+	visitTime[node] = Highestparent[node] = clock;
+
+	for (int i = 0; i < graph[node].size(); ++i) {
+		if (graph[node][i] != parent) { // 确保 dfs 是往更深处查询
+
+			if (visited[graph[node][i]] == 0) {  // 该节点还问被访问
+
+				// node的子节点能访问到的最早祖先, hp越小 表示 越早
+				int hp = criticalConnectionsDetails(graph[node][i], node, ++clock, graph, visited, visitTime, Highestparent, ans);
+
+				// 若该最早祖先 比 node 访问的还要早 则更新node所能访问到的最早祖先 
+				// 举个例子：比如 0 -> 1 -> 2 -> 0 显然 2 可以访问到 0, 由于 2 又是 1 的子节点 则 1 定能访问到 0
+				Highestparent[node] = min(Highestparent[node], hp);
+
+				// 如果子节点 所能访问到的最早祖先 不早于 node 那么 node 与 该子节点的边 必然是关键路径
+				if (hp > visitTime[node])
+					ans.push_back({ node, graph[node][i] });
+
+			}
+			else // 该节点已经访问过 直接更新
+				Highestparent[node] = min(Highestparent[node], Highestparent[graph[node][i]]);
+		}
+	}
+
+	return Highestparent[node];
+}
+
+void GraphSolution::findTheCity()
+{
+	int n = 4, distanceThreshold = 4;
+	vector<vector<int>> path(n, vector<int>(n, INT32_MAX / 4));
+	vector<vector<int>> edges = { {0, 1, 3}, {1, 2, 1}, {1, 3, 4}, {2, 3, 1} };
+	for (int i = 0; i < edges.size(); i++)
+	{
+		path[edges[i][0]][edges[i][1]] = edges[i][2];
+		path[edges[i][1]][edges[i][0]] = edges[i][2];
+	}
+
+	for (int k=0;k<path.size();k++)
+		for (int i=0;i<path.size();i++)
+			for (int j = 0; j < path.size(); j++)
+			{
+				if (path[i][k] + path[k][j] < path[i][j])
+					path[i][j] = path[i][k] + path[k][j];
+			}
+
+	vector<int> nums(n, 0);
+	for (int i=0;i<n;i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (i != j && path[i][j] <= distanceThreshold)
+				nums[i]++;
+		}
+	int min=999999;
+	int minIndex;
+	for (int i = n-1; i>=0; i--)
+	{
+		if (nums[i] < min)
+		{
+			minIndex = i;
+			min = nums[i];
+		}
+	}
+	cout << minIndex;	
+}
+
+void GraphSolution::dijkstra()
+{
+	const int n = 5;
+	int edge[5][5] =
+	{
+		{0,1,2,3,4},
+		{1, 0, 2, 6, 4},
+		{2, INT32_MAX/2, 0,3, INT32_MAX / 2},
+		{3, 7, INT32_MAX / 2, 0, 1},
+		{4, 5, INT32_MAX / 2, 12, 0}
+	};
+	int dis[n + 1];
+	int book[n + 1];
+
+	for (int i = 1; i < n; ++i)
+		dis[i] = edge[0][i];
+
+	memset(book, 0, sizeof(book));
+	book[0] = 1;
+
+	int min;
+	for (int i = 1; i < n; i++)
+	{
+		min = INT32_MAX / 2;
+		int u;
+		for (int j = 1; j < n; ++j) {
+			if (book[j] == 0 && dis[j] < min) {
+				min = dis[j];
+				u = j;
+			}
+		}
+
+		book[u] = 1;
+		for (int v = 1; v < n; ++v) {
+			if (edge[u][v] < INT32_MAX / 2) {
+				if (dis[v] > dis[u] + edge[u][v])
+					dis[v] = dis[u] + edge[u][v];
+			}
+		}
+	}
+
+	for (int i = 1; i < n; ++i)
+		cout << dis[i] << ' ';
 }
 
 

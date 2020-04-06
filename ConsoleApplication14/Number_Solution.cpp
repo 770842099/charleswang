@@ -6,7 +6,8 @@ void Number_Solution::test()
 	//allPossibleFactor();
 	//nextBigNumber();
 
-	numberOf2sInRange();
+	//numberOf2sInRange();
+	CombinationIterator();
 }
 
 
@@ -96,5 +97,46 @@ void Number_Solution::numberOf2sInRange()
 	}
 
 	cout << total;
+}
+
+
+void Number_Solution::CombinationIterator()
+{
+	string s = "abcdef";
+	int n = 3;
+	vector<int> points(n);
+	for (int i = 0; i < n; i++)
+		points[i] = i;
+
+	CombinationIteratorDetails(s, points);
+	while (true)
+	{
+		int i = n - 1;
+		for (int last = s.size() - 1; i >= 0; i--, last--)
+		{
+			if (points[i] != last)
+				break;
+		}
+
+		//end 
+		if (i == -1)
+			break;
+
+		points[i] = points[i] + 1;
+		for (int k = 1; k <n - i; k++)
+		{
+			points[i+k] = points[i]+k;
+		}
+		CombinationIteratorDetails(s, points);
+	}
+}
+
+void Number_Solution::CombinationIteratorDetails(string&s, vector<int>& points)
+{
+	for (int& i : points)
+	{
+		cout << s[i];
+	}
+	cout << endl;
 }
 
