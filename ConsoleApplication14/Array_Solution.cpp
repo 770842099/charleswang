@@ -22,13 +22,19 @@ void Array_Solution::test()
 	//minFlipsMonoIncr();
 
 	//maxEqualFreq();
-	maxFreq();
+	//maxFreq();
+
+	kthLargerNumber();
 }
 
 void Array_Solution::kthLargerNumber()
 {
 	vector<int> a = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
 	int k = 4;
+
+	nth_element(a.begin(), a.begin() + k, a.end());
+	cout << a[k] << endl;
+
 	cout<<kthLargerNumberDetails(a, a.size(), 0, a.size() - 1, k);
 }
 

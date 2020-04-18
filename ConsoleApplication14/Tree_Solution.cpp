@@ -17,7 +17,8 @@ void Tree_Solution::test()
 	//constructFromPrePost();
 	//allPossibleFBT();
 
-	distributeCoins();
+	//distributeCoins();
+	//bothAncestor();
 }
 
 TreeNode* Tree_Solution::Create(vector<TreeValue> values)
@@ -495,6 +496,31 @@ int Tree_Solution::distributeCoinsDetails(TreeNode* node, int& times)
 	times += abs(leftTimes) + abs(rightTimes);
 
 	return leftTimes + rightTimes + node->val- 1;
+}
+
+void Tree_Solution::bothAncestor()
+{
+	TreeNode* root = createTreeWithNum(1, 31);
+	//print2DUtil(root,4);
+	cout << bothAncestorDetails(root, 31, 23);
+}
+
+int Tree_Solution::bothAncestorDetails(TreeNode* root, int value1, int value2)
+{
+	if (root == NULL)
+		return -1;
+
+	if (root->val == value1 || root->val == value2)
+		return 1;
+
+	int left = bothAncestorDetails(root->left, value1, value2);
+	int right = bothAncestorDetails(root->right, value1, value2);
+	if (left == 1 & right == 1)
+		return root->val;
+	else if (left == 1)
+		return left;
+	else
+		return right;
 }
 
 

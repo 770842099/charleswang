@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -110,6 +110,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackReserveSize>10000000</StackReserveSize>
+      <StackCommitSize>10000000</StackCommitSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -187,8 +189,11 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphSolution.h" />
     <ClInclude Include="Greedy_Solution.h" />
+    <ClInclude Include="Hashing.h" />
+    <ClInclude Include="LFUCache.h" />
     <ClInclude Include="LibInclude.h" />
     <ClInclude Include="LinkedList_Solution.h" />
+    <ClInclude Include="lintcode944.cpp" />
     <ClInclude Include="Map_Solution.h" />
     <ClInclude Include="Number_Solution.h" />
     <ClInclude Include="Puzzle_Solution.h" />

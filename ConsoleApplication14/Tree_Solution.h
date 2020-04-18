@@ -72,4 +72,7 @@ public:
 	//leetcode 973
 	void distributeCoins();
 	int distributeCoinsDetails(TreeNode* node, int& times);
+
+	void bothAncestor();
+	int bothAncestorDetails(TreeNode* root, int value1, int value2);
 };

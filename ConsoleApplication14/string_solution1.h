@@ -33,5 +33,25 @@ public:
 	void reverseParentheses();
 	void reverseParentheses_startToend(string& s, int start, int end, vector<char>& vs);
 	void reverseParentheses_endTostart(string& s, int start, int end, vector<char>& vs);
+
+	//lintcode 10
+	void stringpermutations();
+	void stringpermutationsDetails(vector<int> charNums, vector<int>& index, int num, vector<int> order, int total);
+
+	//lintcode 23
+	void wordSubsequence();
+
+	//lintcode 639
+	void wordsAbbreviation();
+	string wordsAbbreviationDetails(string s, int p);
+
+	//lintcode 1047
+	string makeLargestSpecial(string S);
+
+	//leetcode 1410
+	void entityParser();
+
+	//lintcode 200
+	string longestPalindrome();
 };
 

@@ -16,5 +16,8 @@ public:
 
 	//leetcode 1063
 	void validSubarrays();
+
+	//lintcode 229
+	void stackSorting();
 };
 

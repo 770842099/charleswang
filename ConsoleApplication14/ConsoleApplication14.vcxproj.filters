@@ -170,5 +170,14 @@
     <ClInclude Include="LinkedList_Solution.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="LFUCache.h">
+      <Filter>Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Hashing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lintcode944.cpp">
+      <Filter>Special</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

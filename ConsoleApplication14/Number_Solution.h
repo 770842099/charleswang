@@ -18,5 +18,6 @@ public:
 	//leetcode 1286
 	void CombinationIterator();
 	void CombinationIteratorDetails(string&s, vector<int>& points);
+
 };
 

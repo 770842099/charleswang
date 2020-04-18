@@ -10,5 +10,8 @@ public:
 
 	//leetcode 505
 	int puzzle();
+
+	//lintcode 436
+	int maxSquare();
 };
 

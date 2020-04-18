@@ -4,7 +4,9 @@
 void Map_Solution::test()
 {
 	//numberOfIslands();
-	puzzle();
+	//puzzle();
+
+	maxSquare();
 }
 
 int Map_Solution::numberOfIslands()
@@ -136,4 +138,47 @@ int Map_Solution::puzzle()
 	}
 
 	return distance[4][4];
+}
+
+int Map_Solution::maxSquare()
+{
+	vector<vector<int>> matrix = {
+		{ 1, 1, 0},
+		{1, 1, 0}};
+
+	int row = matrix.size();
+	int column = matrix[0].size();
+	int mini = min(row, column);
+
+
+	int maxLenght = 0;
+	vector<vector<vector<bool>>> dp(row, vector<vector<bool>>(column, vector<bool>(mini + 1, false)));
+
+
+	for (int length = 1; length <= mini; length++)
+	{
+		bool Existed = false;
+		for (int i = 0; i < row-(length -1); i++)
+		{
+			for (int j = 0; j < column-(length -1); j++)
+			{
+				if (length == 1)
+					dp[i][j][length] = matrix[i][j] == 1;
+				else
+				{
+					dp[i][j][length] = dp[i][j][length-1] && dp[i+1][j][length-1] && dp[i][j+1][length-1] && dp[i+1][j+1][length-1];
+				}
+				if (dp[i][j][length] && length > maxLenght)
+				{
+					maxLenght = length;
+					Existed = true;
+				}
+			}
+		}
+		if (!Existed)
+			break;
+	}
+
+	cout << maxLenght * maxLenght;
+	return maxLenght* maxLenght;
 }

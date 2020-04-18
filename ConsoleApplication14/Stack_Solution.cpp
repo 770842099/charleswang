@@ -5,7 +5,9 @@ void Stack_Solution::test()
 	//removeNToSmallest();
 	//stockSpanner();
 	//sumSubarrayMins();
-	validSubarrays();
+	//validSubarrays();
+
+	stackSorting();
 }
 
 void Stack_Solution::removeNToSmallest()
@@ -183,6 +185,40 @@ void Stack_Solution::validSubarrays()
 		s.pop();
 	}
 	cout << count;
+}
+
+void Stack_Solution::stackSorting()
+{
+	stack<int>stk;
+	stk.push(4);
+	stk.push(2);
+	stk.push(1);
+	stk.push(3);
+	stack<int> tmp;
+	while (!stk.empty()) {
+		if (!stk.empty() && (tmp.empty() || tmp.top() >= stk.top())) {
+			tmp.push(stk.top());
+			stk.pop();
+		}
+		else {
+			int value = stk.top(); stk.pop();
+			while (!tmp.empty() && tmp.top() <= value) {
+				stk.push(tmp.top());
+				tmp.pop();
+			}
+			stk.push(value);
+			while (!tmp.empty()) {
+				stk.push(tmp.top());
+				tmp.pop();
+			}
+		}
+	}
+	while (!tmp.empty()) {
+		stk.push(tmp.top());
+		tmp.pop();
+	}
+
+
 }
 
 

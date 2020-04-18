@@ -45,6 +45,5 @@ public:
 
 	//leetcode 1297
 	void maxFreq();
-
 };
 

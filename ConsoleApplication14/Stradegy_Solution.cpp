@@ -1,6 +1,6 @@
 #include "Stradegy_Solution.h"
 #include "LibInclude.h"
-
+#include "LFUCache.h"
 
 void Stradegy_Solution::test()
 {
@@ -16,7 +16,11 @@ void Stradegy_Solution::test()
 	//minTaps();
 	//maxEvents();
 
-	fireBomb();
+	//fireBomb();
+
+	//uglyNumber();
+
+	LFU();
 }
 
 
@@ -256,4 +260,80 @@ void Stradegy_Solution::fireBomb()
 		}
 	}
 	cout << count;
+}
+
+void Stradegy_Solution::uglyNumber()
+{
+	int n = 10;
+	vector<int> result;
+	int index2 = 0, index3 = 0, index5 = 0;
+	result.push_back(1);
+	unordered_set<int> existed_set;
+	existed_set.insert(1);
+	for (int i = 1; i < n; i++)
+	{
+		while (existed_set.count(result[index2] * 2))
+			index2++;
+		
+		while (existed_set.count(result[index3] * 3))
+			index3++;
+
+		while (existed_set.count(result[index5] * 3))
+			index5++;
+
+		int nextIndex;
+		int nextValue;
+		if (result[index2] * 2 < result[index3] * 3)
+		{
+			nextIndex = 2;
+			nextValue = result[index2] * 2;
+		}
+		else
+		{
+			nextIndex = 3;
+			nextValue = result[index3] * 3;
+		}
+
+		if (result[index5] * 5 < nextValue)
+		{
+			nextIndex = 5;
+			nextValue = result[index5] * 5;
+		}
+
+		result.push_back(nextValue);
+		existed_set.insert(nextValue);
+
+		switch (nextIndex)
+		{
+		case 2:
+			index2++;
+			break;
+		case 3:
+			index3++;
+			break;
+		case 5:
+			index5++;
+			break;
+		}
+	}
+
+	for (int i : result)
+		cout << i << " ";
+}
+
+void Stradegy_Solution::LFU()
+{
+	LFUCache cache(3);
+	cache.put(2, 2);
+	cache.put(1, 1);
+	cout << cache.get(2) << ",";
+	cout << cache.get(1) << ",";
+	cout << cache.get(2) << ",";
+	cache.put(3, 3);
+	cache.put(4, 4);
+	cout << cache.get(3) << ",";
+	cout << cache.get(2) << ",";
+	cout << cache.get(1) << ",";
+	cout << cache.get(4) << endl;
+
 }

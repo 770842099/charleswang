@@ -70,6 +70,17 @@ public:
 	int static find_rep_sub_size(string s) {
 		return (s + s).find(s, 1);
 	}
+
+	int static intSize(int n)
+	{
+		int l = 0;
+		while (n != 0)
+		{
+			n /= 10;
+			l++;
+		}
+		return l;
+	}
 };
 
 struct Trible

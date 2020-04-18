@@ -16,7 +16,18 @@ void string_solution::run()
 	//shortenString();
 
 	//camelMatch();
-	reverseParentheses();
+	//reverseParentheses();
+
+	//stringpermutations();
+	//wordSubsequence();
+
+	//wordsAbbreviation();
+
+	//makeLargestSpecial("11011000");
+	//cout<<makeLargestSpecial("00101011");
+	//entityParser();
+
+	longestPalindrome();
 }
 
 
@@ -467,6 +478,222 @@ void string_solution::reverseParentheses_endTostart(string& s, int start, int en
 
 		end--;
 	}
+}
+
+void string_solution::stringpermutations()
+{
+	vector<char> s{ 'a','a','b','b','c','c' };
+	vector<int> index(26, -1);
+
+	vector<int> charNums(26,0);
+	int curIndex = 0;
+
+	for (char c : s)
+	{
+		if (index[c - 'a'] == -1)
+		{
+			index[c - 'a'] = curIndex;
+			curIndex++;
+		}
+		charNums[index[c - 'a']]++;
+	}
+	stringpermutationsDetails(charNums, index, 0, vector<int>(), s.size());
+
+}
+
+void string_solution::stringpermutationsDetails(vector<int> charNums, vector<int>& index, int num, vector<int> order, int total)
+{
+	if (num == total)
+	{
+		for (int& c : order)
+		{			
+			cout << (char)('a' + index[c]);
+		}
+		cout << endl;
+		return;
+	}
+
+	for (int i = 0; i < charNums.size(); i++)
+	{
+		if (charNums[i] > 0)
+		{
+			charNums[i]--;
+			order.push_back(i);
+			stringpermutationsDetails(charNums, index, num + 1, order, total);
+			order.pop_back();
+			charNums[i]++;
+		}
+	}
+}
+
+void string_solution::wordSubsequence()
+{
+	int wh[100005][26];
+	string s = "lintcode";
+	unordered_set<string> wordDict{ "de","ding","co","code","lint" };
+	// write your code here
+	
+	for (int i = 0; i < 100005; i++)
+		for (int j = 0; j < 26; j++)
+			wh[i][j] = -1;
+	int len = s.size();
+	vector<string> ans;
+	for (int i = len - 1; i >= 0; i--)
+	{
+		for (int j = 0; j < 26; j++) wh[i][j] = wh[i + 1][j];
+		wh[i][s[i] - 'a'] = i + 1;
+	}
+	for (auto &i : wordDict)
+	{
+		bool flag = true;
+		int cur = 0;
+		int wordlen = i.size();
+		for (int j = 0; j < wordlen; j++)
+		{
+			cur = wh[cur][i[j] - 'a'];
+			if (cur == -1)
+			{
+				flag = false; break;
+			}
+		}
+		if (flag) ans.emplace_back(i);
+	}
+}
+
+void string_solution::wordsAbbreviation()
+{
+	vector<string> dict = { "like","god","internal","me","internet","interval","intension","face","intrusion" };
+	// Write your code here
+	int len = dict.size();
+	vector<string> ans(len);
+	vector<int> prefix(len);
+	unordered_map<string, int> count;
+	for (int i = 0; i < len; i++) {
+		prefix[i] = 1;
+		ans[i] = wordsAbbreviationDetails(dict[i], 1);
+		count[ans[i]]++;
+	}
+	while (true) {
+		bool unique = true;
+		for (int i = 0; i < len; i++) {
+			if (count[ans[i]] > 1) {
+				prefix[i]++;
+				ans[i] = wordsAbbreviationDetails(dict[i], prefix[i]);
+				count[ans[i]]++;
+				unique = false;
+			}
+		}
+		if (unique) {
+			break;
+		}
+	}
+
+	for (string s : ans)
+	{
+		cout << s << endl;
+	}
+
+}
+
+string string_solution::wordsAbbreviationDetails(string s, int p) {
+	if (p >= s.length() - 2) {
+		return s;
+	}
+	string ans;
+	ans = s.substr(0, p) + to_string(s.length() - 1 - p) + s.back();
+	return ans;
+}
+
+string string_solution::makeLargestSpecial(string S)
+{
+	int cnt = 0, i = 0;
+	vector<string> v;
+	string res = "";
+	for (int j = 0; j < S.size(); ++j)
+	{
+		cnt += (S[j] == '1') ? 1 : -1;
+		if (cnt == 0)
+		{
+			cout << S.substr(i + 1, j - i - 1) << endl;
+			v.push_back('1' + makeLargestSpecial(S.substr(i + 1, j - i - 1)) + '0');
+			i = j + 1;
+		}
+	}
+	cout << "vector value" << endl;
+	for (string& value : v)
+		cout << value << " ";
+	cout << endl;
+	sort(v.begin(), v.end(), greater<string>());
+	for (int i = 0; i < v.size(); ++i)
+		res += v[i];
+	return res;
+}
+
+void string_solution::entityParser()
+{
+	string text = "&amp; is an HTML entity but &ambassador; is not.";
+	unordered_map<string, string> strChangMap = { {"&quot;", "\""},{"&apos;", "'"},{"&amp;", "&"},{"&gt;", ">"},{"&lt;", "<"},{"&frasl;", "/"} };
+	//InitTmpVec(tmpVec);
+	string resStr = text;
+	// 找起始位置
+	int beginPos = resStr.find('&');
+	int endPos = resStr.find(';');
+	// -1 找不到 & 或者 ;的时候就可以退出
+	while ((endPos != -1) && (beginPos != -1)) {
+		string strTmp = resStr.substr(beginPos, endPos - beginPos + 1);
+		if (strChangMap.find(strTmp) != strChangMap.end()) {
+			resStr.replace(resStr.begin() + beginPos, resStr.begin() + endPos + 1, strChangMap[strTmp]);
+		}
+		beginPos = resStr.find('&', beginPos + 1);
+		endPos = resStr.find(';', beginPos + 1);
+	}
+	cout << resStr;
+}
+
+
+string string_solution::longestPalindrome()
+{
+	string s = "b";
+	string stemp = "";
+	for (int i = 0; i < s.size() - 1; i++)
+	{
+		stemp.push_back(s[i]);
+		stemp.push_back('#');	
+	}
+	stemp.push_back(s[s.size() - 1]);
+
+	int maxLength = 0;
+	string result;
+	for (int i = 0; i < stemp.size(); i++)
+	{
+		int index = 0;
+		while (i - index >= 0 && i + index < stemp.size())
+		{
+			if (stemp[i - index] == stemp[i + index])
+				index++;
+			else
+				break;
+		}
+
+        index--;
+
+		string ans;
+		for (int k = i - index; k <= i + index; k++)
+		{
+			if (stemp[k] != '#')
+				ans.push_back(stemp[k]);
+		}
+
+		if (ans.length() > maxLength)
+		{
+			result = ans;
+			maxLength = ans.length();
+		}
+	}
+
+
+	cout << result;
+	return result;
 }
 
 

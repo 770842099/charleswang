@@ -14,6 +14,9 @@ public:
 		return v1[1] < v2[1];
 	}
 
+
+
+
 };
 
 struct missionscheduler_obj

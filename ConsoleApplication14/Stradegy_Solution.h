@@ -28,5 +28,10 @@ public :
 	void maxEvents();
 
 	void fireBomb();
+
+	void uglyNumber();
+
+	//lintcode 24
+	void LFU();
 };
 

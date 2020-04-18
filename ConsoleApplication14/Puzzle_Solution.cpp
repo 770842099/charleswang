@@ -6,7 +6,10 @@ void Puzzle_Solution::test()
 	//hannuoTa();
 	//allCalculationByBrace();
 
-	isPossible();
+	//isPossible();
+
+	printRectangle();
+	getRectangleIndex();
 }
 
 void Puzzle_Solution::cal24()
@@ -22,10 +25,10 @@ void Puzzle_Solution::calcDetail(float a[], int num, string s[])
 	{
 		//cout << a[0] << endl;
 		if (abs(a[0] - 24) < 0.0002)
-			cout << s[0].c_str()<<endl;
+			cout << s[0].c_str() << endl;
 	}
 
-	for (int i = 0; i < num -1; i++)
+	for (int i = 0; i < num - 1; i++)
 	{
 		for (int j = i + 1; j < num; j++)
 		{
@@ -33,7 +36,7 @@ void Puzzle_Solution::calcDetail(float a[], int num, string s[])
 			float tempb = a[j];
 			string stempa = s[i];
 			string stempb = s[j];
-			
+
 			float calculated;
 			string scalc;
 			for (int k = 0; k < 8; k++)
@@ -148,13 +151,13 @@ void Puzzle_Solution::allCalculationByBrace()
 	{
 		for (int i = 0; i < nums - l + 1; i++)
 		{
-			for (int j = 0; j < l-1; j++)
+			for (int j = 0; j < l - 1; j++)
 			{
 				for (int first : dp[i][i + j])
 				{
 					for (int second : dp[i + j + 1][i + l - 1])
 					{
-						switch (calc[i+j])
+						switch (calc[i + j])
 						{
 						case '+':
 							dp[i][i + l - 1].push_back(first + second);
@@ -171,7 +174,7 @@ void Puzzle_Solution::allCalculationByBrace()
 			}
 		}
 	}
-	for (int result : dp[0][0 + v.size()-1])
+	for (int result : dp[0][0 + v.size() - 1])
 	{
 		cout << result << endl;
 	}
@@ -182,7 +185,7 @@ void Puzzle_Solution::allCalculationByBrace()
 void Puzzle_Solution::isPossible()
 {
 	vector<int> nums = { 1, 2, 3, 3, 4, 4, 5, 5 };
-	
+
 	unordered_map<int, int> freq, need;
 	for (int num : nums) ++freq[num];
 	for (int num : nums) {
@@ -200,5 +203,112 @@ void Puzzle_Solution::isPossible()
 			cout << "false" << endl;
 		--freq[num];
 	}
-	cout<<"true";
+	cout << "true";
 }
+
+void Puzzle_Solution::printRectangle()
+{
+	int n = 6;
+	int direction = 1;   //1,2,3,4
+	int i = 1;
+	int maxLength = LibHelper::intSize(n*n) + 1;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			int cur = 0;
+			int minIndex = 0;
+			if (j >= i && j <= n - 1 - i)
+			{
+				cur = 0;
+				minIndex = i;
+			}
+			else if (i >= (n - 1 - j) && i <= j)
+			{
+				cur = 1;
+				minIndex = n - 1 - j;
+			}
+			else if (j >= (n - 1 - i) && j <= i)
+			{
+				cur = 2;
+				minIndex = n - 1 - i;
+			}
+			else if (i >= j && i <= n - 1 - j)
+			{
+				cur = 3;
+				minIndex = j;
+			}
+
+	
+
+			int num = 1;
+			int outEdge = n - 1;
+			int outSize = minIndex;
+			while (minIndex > 0)
+			{
+				num += 4 * outEdge;
+				outEdge -= 2;
+				minIndex--;
+			}
+
+			switch (cur)
+			{
+			case 0:
+				num += j - i;
+				break;
+			case 1:
+				num += outEdge + i- outSize;
+				break;
+			case 2:
+				num += 2 * outEdge+(n-1-j-outSize);
+				break;
+			case 3:
+				num += 3 * outEdge + (n - 1 - i - outSize);;
+				break;
+			}
+
+			int space = maxLength - LibHelper::intSize(num);
+			while (space > 0)
+			{
+				cout << " ";
+				space--;
+			}
+			cout << num;
+		}
+		cout << endl;
+	}
+}
+
+void Puzzle_Solution::getRectangleIndex()
+{
+	//i=2; j=1  n=32
+	int size = 6;
+	int n = 20;
+	int outEdge = size - 1;
+	int outsideSize = 0;
+	while (n > (4*outEdge))
+	{
+		n -= 4 * outEdge;
+		outEdge -= 2;
+		outsideSize++;
+	}
+	if (n <= outEdge)
+	{
+		cout << outsideSize << " " << n + outsideSize-1;
+	}
+	else if (n <= 2 * outEdge)
+	{
+		cout << n - outEdge + outsideSize - 1 << " " << (size - 1 - outsideSize);
+	}
+	else if (n <= 3 * outEdge)
+	{
+		cout << (size - 1 - outsideSize) << " " << size- outsideSize -(n - 2*outEdge);
+	}
+	else
+	{
+		cout << (size-1-outsideSize)-(n-3*outEdge-1) << " " << outsideSize;
+	}
+
+}
+
