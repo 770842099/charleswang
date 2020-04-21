@@ -312,3 +312,46 @@ void Puzzle_Solution::getRectangleIndex()
 
 }
 
+void Puzzle_Solution::findRotateSteps()
+{
+	string ring = "ababcab", key = "acbaacba";
+	
+	int keyNum = key.size();
+		int ringSize = ring.size();
+		vector<vector<pair<int, int>>> dp(keyNum + 1);
+		dp[0] = { make_pair(0,0) };
+
+		vector<vector<int>> numPosition(26);
+		for (int i = 0; i < ring.size(); i++)
+		{
+			numPosition[ring[i] - 'a'].push_back(i);
+		}
+
+		for (int i = 1; i <= keyNum; i++)
+		{
+			vector<int>& keyPos = numPosition[key[i - 1] - 'a'];
+			vector<pair<int, int>> v;
+			for (int j = 0; j < keyPos.size(); j++)
+			{
+				int pos = keyPos[j];
+				int init = INT_MAX;
+				for (pair<int, int> last : dp[i - 1])
+				{
+					int rotate = abs(last.first - pos);
+					rotate = min(rotate, ringSize - rotate);
+					int value = rotate + last.second;
+					init = min(init, value);
+				}
+				v.push_back(make_pair(pos, init + 1));
+			}
+			dp[i] = v;
+		}
+
+		int ans = INT_MAX;
+		for (pair<int, int>& v : dp[keyNum])
+		{
+			ans = min(ans, v.second);
+		}
+		return ans;
+}
+

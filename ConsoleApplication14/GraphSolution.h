@@ -14,6 +14,12 @@ struct GraphValue {
 	}
 };
 
+struct UndirectedGraphNode {
+	int label;
+	vector<UndirectedGraphNode *> neighbors;
+	UndirectedGraphNode(int x) : label(x) {};
+	UndirectedGraphNode() {};
+};
 
 class GraphSolution
 {
@@ -22,6 +28,7 @@ public:
 	bool isCircled();
 	int shortestConnected();
 	bool topOrder();
+	bool topOrder2();
 	void test();
 	void shortestPath();
 	void dijkstra();
@@ -43,6 +50,9 @@ public:
 	//leetcode floyid 1334
 	void findTheCity();
 
+	int findParent(int p, vector<int>& parent);
+	void unionGroup(vector<int>& parent, int i, int j);
 
+	vector<UndirectedGraphNode*> createGraph(vector<vector<int>> v);
 };
 

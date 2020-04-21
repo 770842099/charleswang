@@ -165,6 +165,7 @@
     <ClCompile Include="LinkedList_Solution.cpp" />
     <ClCompile Include="linked_list.cpp" />
     <ClCompile Include="linked_list.h" />
+    <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="Map_Solution.cpp" />
     <ClCompile Include="Number_Solution.cpp" />
     <ClCompile Include="Puzzle_Solution.cpp" />

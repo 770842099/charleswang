@@ -17,6 +17,7 @@
 #include "linked_list.h"
 #include "TrieTree.h"
 #include <cmath>
+#include "ListNode.cpp"
 //#include <list>
 using namespace std;
 
@@ -45,6 +46,14 @@ public:
 			pos += replace.length();
 		}
 		return subject;
+	}
+
+	void static coutVector(vector<int> v)
+	{
+		for (int i = 0; i < v.size(); i++)
+		{
+			cout << v[i] << " ";
+		}
 	}
 
 	vector<int> static int_to_binary(int num, int& numof1)
@@ -96,6 +105,7 @@ struct Trible
 		three = _three;
 	}
 };
+
 
 
 

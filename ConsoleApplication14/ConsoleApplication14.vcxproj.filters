@@ -99,6 +99,9 @@
     <ClCompile Include="LinkedList_Solution.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ListNode.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrieTree.h">

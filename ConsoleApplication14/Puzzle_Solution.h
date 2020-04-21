@@ -25,5 +25,8 @@ public:
 	void printRectangle();
 
 	void getRectangleIndex();
+
+	//lintcode 1196
+	void findRotateSteps();
 };
 

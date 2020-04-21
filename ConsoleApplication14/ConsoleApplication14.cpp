@@ -1,15 +1,16 @@
 ﻿// ConsoleApplication14.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
-#include "string_solution1.h"
-#include "Tree_Solution.h"
-#include "GraphSolution.h"
-#include "Greedy_Solution.h"
 #include <iostream>
 #include <queue>
 #include <string>
 #include <set>
 #include <map>
 #include <algorithm>
+#
+#include "LibInclude.h"
+#include "string_solution1.h"
+#include "Tree_Solution.h"
+#include "Greedy_Solution.h"
 #include "Recursive_Solution.h"
 #include "DP_Solution.h"
 #include "Puzzle_Solution.h"
@@ -28,7 +29,7 @@
 #include "LinkedList_Solution.h"
 #include "Hashing.h"
 #include "lintcode944.cpp"
-#include "LibInclude.h"
+#include "GraphSolution.h"
 //
 //void print_priority_queue(priority_queue<int>& q)
 //{
@@ -341,12 +342,84 @@
 //	}
 //}
 
+//void connectedSetDetails(UndirectedGraphNode* nodes, vector<int>& parent, vector<bool>& visited) {
+//	// write your code here
+//	vector<vector<int>> ans;
+//	if (visited[nodes->label])
+//		return;
+//
+//	visited[nodes->label] = true;
+//
+//
+//
+//
+//}
+
+int findRotateSteps(string &ring, string &key) {
+	int keyNum = key.size();
+	int ringSize = ring.size();
+	vector<vector<pair<int, int>>> dp(keyNum+1);
+	dp[0] = { make_pair(0,0) };
+
+	vector<vector<int>> numPosition(26);
+	for (int i = 0; i < ring.size(); i++)
+	{
+		numPosition[ring[i]-'a'].push_back(i);
+	}
+
+	for (int i = 1; i <= keyNum; i++)
+	{
+		vector<int>& keyPos = numPosition[key[i - 1]-'a'];
+		vector<pair<int, int>> v;
+		for (int j = 0; j < keyPos.size(); j++)
+		{
+			int pos = keyPos[j];
+			int init = INT_MAX;
+			for (pair<int, int> last : dp[i - 1])
+			{
+				int rotate = abs(last.first - pos);
+				rotate = min(rotate, ringSize - rotate);
+				int value = rotate + last.second;
+				init = min(init,value);
+			}
+			v.push_back(make_pair(pos, init+1));
+		}
+		dp[i] = v;
+	}
+
+	int ans = INT_MAX;
+	for (pair<int, int>& v : dp[keyNum])
+	{
+		ans = min(ans, v.second);
+	}
+	return ans;
+}
+
 
 
 int main()
 {
+	string ring = "ababcab", key = "acbaacba";
+
+	//string ring = "godding", key = "godding";
+	cout << findRotateSteps(ring, key);
+	
 
 
+	//vector<int> A = { 1,2,3,3,7 };
+	//vector<int> V = { 1, 5, 2, 4 };
+	//int m = 7;
+	//cout << backPackV(A, m);
+
+//Input: n = 5 edges = [[0, 1], [0, 2], [0, 3], [1, 4]]
+//	Output : true.
+//	Example 2 :
+//
+//	Input : n = 5 edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]
+
+	//LibHelper::coutVector(nextGreaterElements(input));
+
+//[1, 3, 6, 7]
 
 
 	//test_priority_queue();
@@ -410,8 +483,8 @@ int main()
 	//Stradegy_Solution s;
 	//s.test();
 
-	Map_Solution map;
-    map.test();
+	//Map_Solution map;
+    //map.test();
 
 	//Stack_Solution s;
 	//s.test();

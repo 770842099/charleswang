@@ -1,10 +1,7 @@
 #include "GraphSolution.h"
 #include "Graph.h"
-#include <queue>
-#include <limits>
-#include <iostream>
-#include <vector>
 #include "LibInclude.h"
+
 using namespace std;
 Graph GraphSolution::init()
 {
@@ -71,19 +68,16 @@ bool GraphSolution::isCircled()
 	return true;
 }
 
-int findParent(int p, int parent[])
+int GraphSolution::findParent(int p, vector<int>& parent)
 {
-	while (parent[p] != p)
-		p = parent[p];
-	return p;
+	if (parent[p] != p)
+		parent[p] = findParent(parent[p], parent);
+	return parent[p];
 }
 
-void unionGroup(int parent[], int i, int j)
+void GraphSolution::unionGroup(vector<int>& parent, int i, int j)
 {
-	//if (j<i)
-	parent[parent[i]] = parent[j];
-	//else
-		//parent[parent[j]] = parent[i];
+	parent[findParent(i, parent)] = findParent(j, parent);
 }
 
 int GraphSolution::shortestConnected()
@@ -102,7 +96,7 @@ int GraphSolution::shortestConnected()
 
 	sort(v.begin(), v.end());
 
-	int parent[6];
+	vector<int> parent(6);
 	for (int i = 0; i < 6; i++)
 	{
 		parent[i] = i;
@@ -166,6 +160,51 @@ bool GraphSolution::topOrder()
 	}
 	cout << (count == 7) << endl;
 	return 1;
+}
+
+bool GraphSolution::topOrder2()
+{
+	vector<int> start;
+	vector<int> end;
+	int n = 0;
+	for (int s : start)
+		n = max(n, s);
+	for (int s : end)
+		n = max(n, s);
+
+	vector<vector<int>> graph(n + 1);
+	vector<int> d(n + 1);
+	for (int i = 0; i < start.size(); i++)
+	{
+		graph[start[i]].push_back(end[i]);
+		d[end[i]]++;
+	}
+
+	queue<int> que;
+	for (int i = 1; i <= n; i++)
+	{
+		if (graph[i].size() && !d[i])
+			que.push(i);
+	}
+
+	while (!que.empty())
+	{
+		int h = que.front();
+		que.pop();
+
+		for (int y : graph[h])
+		{
+			d[y]--;
+			if (!d[y])
+				que.push(y);
+		}
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		if (d[i])
+			return true;
+	}
+	return false;
 }
 
 void GraphSolution::shortestPath()
@@ -507,6 +546,30 @@ void GraphSolution::dijkstra()
 		cout << dis[i] << ' ';
 }
 
+vector<UndirectedGraphNode*> GraphSolution::createGraph(vector<vector<int>> v)
+{
+	vector<UndirectedGraphNode*> ans;
+
+	unordered_map<int, UndirectedGraphNode*> map;
+	for (vector<int> item : v)
+	{
+		UndirectedGraphNode* g = new UndirectedGraphNode(item[0]);
+		map.insert(make_pair(item[0], g));
+	}
+
+	for (vector<int> item : v)
+	{
+		UndirectedGraphNode* g = map[item[0]];
+		for (int i = 1; i < item.size(); i++)
+		{
+			g->neighbors.push_back(map[item[i]]);
+		}
+		ans.push_back(g);
+	}
+
+	return ans;
+	
+}
 
 
 
