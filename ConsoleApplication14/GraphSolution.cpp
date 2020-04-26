@@ -2,7 +2,6 @@
 #include "Graph.h"
 #include "LibInclude.h"
 
-using namespace std;
 Graph GraphSolution::init()
 {
 	Graph g(6);
@@ -27,7 +26,9 @@ void  GraphSolution::test()
 
 	//criticalConnections();
 	//findTheCity();
-	dijkstra();
+	//dijkstra();
+
+	findMinHeightTrees();
 }
 
 bool GraphSolution::isCircled()
@@ -571,5 +572,103 @@ vector<UndirectedGraphNode*> GraphSolution::createGraph(vector<vector<int>> v)
 	
 }
 
+vector<int> GraphSolution::findMinHeightTrees()
+{
+	int n=6;
+	vector<vector<int>> edges = { {0, 3}, {1, 3}, {2, 3}, {4, 3}, {5, 4} };
+	
+	vector<vector<int>> output(n);
+	vector<int> inputNum(n, 0);
+
+	for (vector<int>& v : edges)
+	{
+		output[v[0]].push_back(v[1]);
+		output[v[1]].push_back(v[0]);
+
+		inputNum[v[0]]++;
+		inputNum[v[1]]++;
+	}
+
+	queue<int> que;
+	queue<int> last;
+	for (int i = 0; i < n; i++)
+	{
+		if (inputNum[i] == 1)
+		{
+			que.push(i);
+			inputNum[i]--;
+		}
+	}
+	int length = 1;
+	while (!que.empty())
+	{
+		last = que;
+		queue<int> q2;
+		while (!que.empty())
+		{
+			int temp = que.front();
+			que.pop();
+			for (int& v : output[temp])
+			{
+				inputNum[v]--;
+				if (inputNum[v] == 1)
+					q2.push(v);
+			}
+		}
+		length++;
+		que = q2;
+	}
+	//cout << length;
+
+	vector<int> ans;
+	while (!last.empty())
+	{
+		ans.push_back(last.front());
+		last.pop();
+	}
+
+
+		if (!ans.size())
+		{
+			vector<int> em{ 0 };
+			return em;
+		}
+	return ans;
+}
+
+int GraphSolution::networkDelayTime(vector<vector<int>>& times, int N, int K) {
+	const int INF = 0x3f3f3f3f;
+	vector<int> dist(N + 1, INF); // 保存到起点的距离
+	vector<bool> st(N + 1, false); // 是否最短
+	typedef pair<int, int> PII;
+	unordered_map<int, vector<PII>> edges; // 邻接表
+
+	queue<int> q;
+	q.push(K);
+	dist[K] = 0;
+	st[K] = true; // 是否在队列中
+
+	for (auto &t : times) {
+		edges[t[0]].push_back({ t[1], t[2] });
+	}
+
+	while (!q.empty()) { // 当没有点可以更新的时候，说明得到最短路
+		auto t = q.front();
+		q.pop();
+		st[t] = false;
+		for (auto &e : edges[t]) { // 更新队列中的点出发的 所有边
+			int v = e.first, w = e.second;
+			if (dist[v] > dist[t] + w) {
+				dist[v] = dist[t] + w;
+				if (!st[v]) {
+					q.push(v);
+					st[v] = true;
+				}
+			}
+		}
+	}
+	int ans = *max_element(dist.begin() + 1, dist.end());
+	return ans == INF ? -1 : ans;
+}
 
 

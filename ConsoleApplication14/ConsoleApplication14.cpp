@@ -342,85 +342,31 @@
 //	}
 //}
 
-//void connectedSetDetails(UndirectedGraphNode* nodes, vector<int>& parent, vector<bool>& visited) {
-//	// write your code here
-//	vector<vector<int>> ans;
-//	if (visited[nodes->label])
-//		return;
-//
-//	visited[nodes->label] = true;
-//
-//
-//
-//
-//}
 
-int findRotateSteps(string &ring, string &key) {
-	int keyNum = key.size();
-	int ringSize = ring.size();
-	vector<vector<pair<int, int>>> dp(keyNum+1);
-	dp[0] = { make_pair(0,0) };
 
-	vector<vector<int>> numPosition(26);
-	for (int i = 0; i < ring.size(); i++)
-	{
-		numPosition[ring[i]-'a'].push_back(i);
-	}
-
-	for (int i = 1; i <= keyNum; i++)
-	{
-		vector<int>& keyPos = numPosition[key[i - 1]-'a'];
-		vector<pair<int, int>> v;
-		for (int j = 0; j < keyPos.size(); j++)
-		{
-			int pos = keyPos[j];
-			int init = INT_MAX;
-			for (pair<int, int> last : dp[i - 1])
-			{
-				int rotate = abs(last.first - pos);
-				rotate = min(rotate, ringSize - rotate);
-				int value = rotate + last.second;
-				init = min(init,value);
-			}
-			v.push_back(make_pair(pos, init+1));
-		}
-		dp[i] = v;
-	}
-
-	int ans = INT_MAX;
-	for (pair<int, int>& v : dp[keyNum])
-	{
-		ans = min(ans, v.second);
-	}
-	return ans;
-}
 
 
 
 int main()
 {
-	string ring = "ababcab", key = "acbaacba";
-
-	//string ring = "godding", key = "godding";
-	cout << findRotateSteps(ring, key);
+	vector<int> nums = { 1,3,2,2,5,2,3,7 };
+	unordered_map<int, int> count;
+	int ans = 0;
+	for (auto num : nums)
+		count[num]++;
+	for (auto num : nums)
+		if ()
+			ans = max(ans, count[num] + count[num - 1]);
+	cout<< ans;
 	
+	
+	
+	
+	//vector<vector<int>> v = { {4, 10, 15, 24, 26}, {0, 9, 12, 20}, {5, 18, 22, 30} };
 
 
-	//vector<int> A = { 1,2,3,3,7 };
-	//vector<int> V = { 1, 5, 2, 4 };
-	//int m = 7;
-	//cout << backPackV(A, m);
-
-//Input: n = 5 edges = [[0, 1], [0, 2], [0, 3], [1, 4]]
-//	Output : true.
-//	Example 2 :
-//
-//	Input : n = 5 edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]
 
 	//LibHelper::coutVector(nextGreaterElements(input));
-
-//[1, 3, 6, 7]
-
 
 	//test_priority_queue();
 	//test_string();
@@ -458,8 +404,8 @@ int main()
    // DP_Solution dp;
 	//dp.test();
 
-	//Puzzle_Solution puzzle;
-	//puzzle.test();
+    //Puzzle_Solution puzzle;
+    //puzzle.test();
 
 	//DFS_Solution dfs;
 	//dfs.test();

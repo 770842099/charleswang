@@ -140,3 +140,47 @@ void Number_Solution::CombinationIteratorDetails(string&s, vector<int>& points)
 	cout << endl;
 }
 
+struct cmp233 {
+	bool operator()(const pair<int, int> & a, const pair<int, int> & b)
+	{
+		return a.first > b.first;
+	}
+};
+vector<int> Number_Solution::smallestRange(vector<vector<int>> &nums) {
+	priority_queue<pair<int, int>, vector<pair<int, int>>, cmp233> pri;
+	vector<int> se(nums.size(), 0);
+	int maxNum = -(INT_MAX - 1);
+	vector<int> ans(2);
+	int lessLength = INT_MAX;
+
+	for (int i = 0; i < nums.size(); i++)
+	{
+		pri.emplace(nums[i][se[i]], i);
+		maxNum = max(nums[i][se[i]], maxNum);
+	}
+
+	do
+	{
+		if (maxNum - pri.top().first < lessLength)
+		{
+			ans[0] = pri.top().first;
+			ans[1] = maxNum;
+			lessLength = maxNum - pri.top().first;
+		}
+
+
+		pair<int, int> t = pri.top();
+		pri.pop();
+		se[t.second]++;
+		if (se[t.second] < nums[t.second].size())
+		{
+			int value = nums[t.second][se[t.second]];
+			pri.emplace(value, t.second);
+			maxNum = max(maxNum, value);
+		}
+		else
+			break;
+
+	} while (!pri.empty());
+	return ans;
+}

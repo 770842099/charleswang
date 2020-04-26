@@ -8,8 +8,10 @@ void Puzzle_Solution::test()
 
 	//isPossible();
 
-	printRectangle();
-	getRectangleIndex();
+	//printRectangle();
+	//getRectangleIndex();
+
+	getKth();
 }
 
 void Puzzle_Solution::cal24()
@@ -352,6 +354,43 @@ void Puzzle_Solution::findRotateSteps()
 		{
 			ans = min(ans, v.second);
 		}
-		return ans;
+		//return ans;
+}
+
+int Puzzle_Solution::getKth()
+{
+	unordered_map<int, int> cached;
+	vector<pair<int,int>> n;
+	int lo = 12, hi = 15, k = 2;
+	for (int i = lo; i <= hi; i++)
+	{
+		n.push_back({ getKthDetail(cached, i),i });
+	}
+	sort(n.begin(), n.end(), [](const pair<int, int>& a, pair<int, int>&b) {
+		return a.first < b.first;
+	});
+	cout << n[k - 1].second;
+	return 0;
+}
+
+int Puzzle_Solution::getKthDetail(unordered_map<int, int>& cached, int n)
+{
+	if (n == 1)
+		return 0;
+
+	if (cached.count(n) > 0)
+		return cached[n];
+
+	int temp;
+	if (n % 2==0)
+	{
+		temp = getKthDetail(cached, n / 2) + 1;
+	}
+	else
+	{
+		temp = getKthDetail(cached, n *3+1) + 1;
+	}
+	cached[n] = temp;
+	return temp;
 }
 

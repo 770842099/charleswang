@@ -54,5 +54,10 @@ public:
 	void unionGroup(vector<int>& parent, int i, int j);
 
 	vector<UndirectedGraphNode*> createGraph(vector<vector<int>> v);
-};
 
+	//leetcode 310
+	vector<int> findMinHeightTrees();
+
+	//leetcode shortestPath (stardard)
+	int networkDelayTime(vector<vector<int>>& times, int N, int K);
+};

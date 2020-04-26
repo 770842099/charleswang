@@ -16,6 +16,8 @@ public:
 	bool completedExist(string word);
 	void test();
 	TrieTreeNode *root;
+
+	string getPrefix(string str);
 };
 
 

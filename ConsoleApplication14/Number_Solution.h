@@ -18,6 +18,8 @@ public:
 	//leetcode 1286
 	void CombinationIterator();
 	void CombinationIteratorDetails(string&s, vector<int>& points);
-
+	
+	//lintcode 1118
+	vector<int> smallestRange(vector<vector<int>> &nums);
 };
 

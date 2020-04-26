@@ -72,3 +72,28 @@ void TrieTree::add(string word)
 	}
 	cur->isLeaf = true;
 }
+
+string TrieTree::getPrefix(string word)
+{
+	int size = (int)word.length();
+	bool match = true;
+	TrieTreeNode * cur = this->root;
+	int i = 0;
+	for (; i < size; i++)
+	{
+		if (cur->node[word[i] - 'a'] == NULL)
+		{
+			match = false;
+			break;
+		}
+		else
+		{
+			cur = cur->node[word[i] - 'a'];
+			if (cur->isLeaf)
+			{
+				return word.substr(0, i + 1);
+			}
+		}
+	}
+	return word;
+}

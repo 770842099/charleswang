@@ -28,5 +28,9 @@ public:
 
 	//lintcode 1196
 	void findRotateSteps();
+
+	//leetcode 1387
+	int getKth();
+	int getKthDetail(unordered_map<int, int>& cached, int n);
 };
 
