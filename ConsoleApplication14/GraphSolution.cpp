@@ -78,7 +78,10 @@ int GraphSolution::findParent(int p, vector<int>& parent)
 
 void GraphSolution::unionGroup(vector<int>& parent, int i, int j)
 {
-	parent[findParent(i, parent)] = findParent(j, parent);
+	int i1 = findParent(i, parent);
+	int j1= findParent(j, parent);
+	if (i1!=j1)
+		parent[i1] = j1;
 }
 
 int GraphSolution::shortestConnected()

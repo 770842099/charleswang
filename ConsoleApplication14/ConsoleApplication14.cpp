@@ -30,6 +30,7 @@
 #include "Hashing.h"
 #include "lintcode944.cpp"
 #include "GraphSolution.h"
+#include "XiongyaliAlgorithm.h"
 //
 //void print_priority_queue(priority_queue<int>& q)
 //{
@@ -342,26 +343,31 @@
 //	}
 //}
 
+int isValid(vector<int> &a) {
+	// Write your code here
+	unordered_set<int> set;
+	for (int& i : a)
+	{
+		if (set.count(i))
+			set.erase(i);
+		else
+			set.insert(i);
+	}
+
+	if (set.size() == 1)
+		return *set.begin();
+	else
+		return -1;
 
 
-
-
+}
 
 int main()
 {
-	vector<int> nums = { 1,3,2,2,5,2,3,7 };
-	unordered_map<int, int> count;
-	int ans = 0;
-	for (auto num : nums)
-		count[num]++;
-	for (auto num : nums)
-		if ()
-			ans = max(ans, count[num] + count[num - 1]);
-	cout<< ans;
-	
-	
-	
-	
+	vector<int> a = { 1, 1, 2, 2, 3, 4, 4, 5, 5 };
+	cout << isValid(a);
+
+
 	//vector<vector<int>> v = { {4, 10, 15, 24, 26}, {0, 9, 12, 20}, {5, 18, 22, 30} };
 
 
@@ -455,6 +461,12 @@ int main()
 
 	//lintcode944 s;
 	//s.test();
+
+	//lintcode1456
+	XiongyaliAlgorithm s;
+	string target = "ally";
+	vector<string> words = { "buy", "discard", "lip", "yep" };
+	cout << s.matchFunction(target, words);
 }
 
 

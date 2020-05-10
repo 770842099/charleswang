@@ -102,6 +102,9 @@
     <ClCompile Include="ListNode.cpp">
       <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="XiongyaliAlgorithm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrieTree.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="lintcode944.cpp">
       <Filter>Special</Filter>
+    </ClInclude>
+    <ClInclude Include="XiongyaliAlgorithm.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

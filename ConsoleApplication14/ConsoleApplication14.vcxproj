@@ -180,6 +180,7 @@
     <ClCompile Include="Tree_Solution.cpp" />
     <ClCompile Include="TrieTree.cpp" />
     <ClCompile Include="UnionSetUtil.cpp" />
+    <ClCompile Include="XiongyaliAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array_Solution.h" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Tree_Solution.h" />
     <ClInclude Include="TrieTree.h" />
     <ClInclude Include="UnionSetUtil.h" />
+    <ClInclude Include="XiongyaliAlgorithm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

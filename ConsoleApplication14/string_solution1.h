@@ -53,5 +53,6 @@ public:
 
 	//lintcode 200
 	string longestPalindrome();
+
 };
 

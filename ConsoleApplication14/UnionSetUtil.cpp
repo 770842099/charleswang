@@ -11,14 +11,20 @@ void UnionSetUtil::init(int num)
 
 void UnionSetUtil::unionGroup(int i, int j)
 {
-	if (getParent(i)< getParent(j))
-	{
-		v[getParent(j)] = getParent(i);
-	}
-	else if (getParent(i) > getParent(j))
-	{
-		v[getParent(i)] = getParent(j);
-	}
+	int i1 = getParent(i);
+	int j1 = getParent(j);
+
+	if (i1 != j1)
+		v[i1] = j1;
+	
+	//if (getParent(i)< getParent(j))
+	//{
+	//	v[getParent(j)] = getParent(i);
+	//}
+	//else if (getParent(i) > getParent(j))
+	//{
+	//	v[getParent(i)] = getParent(j);
+	//}
 }
 
 
