@@ -103,6 +103,7 @@ void Array_Solution::slibingMaxValue()
 	int k = 3;
 
 	deque<pair<int,int>> s;
+    
 
 	for (int i = 0; i < v.size(); i++)
 	{

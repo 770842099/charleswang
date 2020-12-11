@@ -8,5 +8,7 @@ public:
 
 	//void 
 	ListNode* mergeTwoLists();
+
+	int getWinner(vector<int>& arr, int k);
 };
 

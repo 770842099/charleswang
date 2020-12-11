@@ -344,8 +344,10 @@
 //}
 
 int isValid(vector<int> &a) {
+	
 	// Write your code here
 	unordered_set<int> set;
+
 	for (int& i : a)
 	{
 		if (set.count(i))
@@ -358,15 +360,12 @@ int isValid(vector<int> &a) {
 		return *set.begin();
 	else
 		return -1;
-
-
 }
+
+
 
 int main()
 {
-	vector<int> a = { 1, 1, 2, 2, 3, 4, 4, 5, 5 };
-	cout << isValid(a);
-
 
 	//vector<vector<int>> v = { {4, 10, 15, 24, 26}, {0, 9, 12, 20}, {5, 18, 22, 30} };
 
@@ -463,10 +462,10 @@ int main()
 	//s.test();
 
 	//lintcode1456
-	XiongyaliAlgorithm s;
-	string target = "ally";
-	vector<string> words = { "buy", "discard", "lip", "yep" };
-	cout << s.matchFunction(target, words);
+	//XiongyaliAlgorithm s;
+	//string target = "ally";
+	//vector<string> words = { "buy", "discard", "lip", "yep" };
+	//cout << s.matchFunction(target, words);
 }
 
 

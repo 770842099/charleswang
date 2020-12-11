@@ -86,3 +86,57 @@ ListNode* LinkedList_Solution::mergeTwoLists()
 
 	return ans;
 }
+
+int LinkedList_Solution::getWinner(vector<int>& arr, int k) {
+	list<int> s;
+	if (k > arr.size() - 1)
+		k = arr.size() - 1;
+
+	for (int&i : arr) {
+		s.push_back(i);
+	}
+
+	int round = -1;
+	int big = -99999999;
+	int curBigNum;
+	int curSmallNum;
+	while (round < k)
+	{
+		list<int>::iterator seconde_iterator;
+		seconde_iterator = ++s.begin();
+
+		int aa = *s.begin();
+		int bb = *seconde_iterator;
+
+		if (*seconde_iterator > *s.begin()) {
+			curBigNum = *seconde_iterator;
+			curSmallNum = *s.begin();
+		}
+		else {
+			curBigNum = *s.begin();
+			curSmallNum = *seconde_iterator;
+		}
+		if (curBigNum == big)
+		{
+			round++;
+		}
+		else
+		{
+			round = 1;
+		}
+		big = curBigNum;
+
+		if (*seconde_iterator > *s.begin()) {
+			s.erase(s.begin());
+			s.push_back(curSmallNum);
+		}
+		else
+		{
+			s.erase(seconde_iterator);
+			s.push_back(curSmallNum);
+		}
+	}
+
+	return curBigNum;
+
+}
