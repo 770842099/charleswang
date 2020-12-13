@@ -696,5 +696,26 @@ string string_solution::longestPalindrome()
 	return result;
 }
 
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+	vector<vector<string>> result;
+	vector<string> sameStr;
+	unordered_map<string, vector<string>> m;
+	for (string& s : strs) {
+		string temp = s;
+		sort(temp.begin(), temp.end());
+		if (m.count(temp) == 0) {
+			m[temp].push_back(s);
+			sameStr.push_back(temp);
+		}
+		else {
+			m[temp].push_back(s);
+		}
+	}
+	for (string& s : sameStr) {
+		result.push_back(m[s]);
+	}
+	return result;
+}
+
 
 

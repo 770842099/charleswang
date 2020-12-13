@@ -54,5 +54,9 @@ public:
 	//lintcode 200
 	string longestPalindrome();
 
+	//leetcode 49
+	vector<vector<string>> groupAnagrams(vector<string>& strs);
+
+
 };
 
