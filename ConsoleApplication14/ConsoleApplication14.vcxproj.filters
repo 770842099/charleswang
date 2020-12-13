@@ -189,4 +189,7 @@
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="新的 必看.txt" />
+  </ItemGroup>
 </Project>

@@ -140,3 +140,66 @@ int LinkedList_Solution::getWinner(vector<int>& arr, int k) {
 	return curBigNum;
 
 }
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+
+//class Solution {
+//public:
+//	ListNode* plusOne(ListNode* head) {
+//		if (head == NULL)
+//			return NULL;
+//		ListNode* curHead = reversed(head);
+//		ListNode* temp = curHead;
+//		ListNode* pre = temp;
+//		while (temp != NULL) {
+//			if (temp->val == 9) {
+//				temp->val = 0;
+//				pre = temp;
+//				temp = temp->next;
+//			}
+//			else {
+//				temp->val++;
+//				break;
+//			}
+//		}
+//		if (temp == NULL && pre->val == 0) {
+//			pre->next = new ListNode(1);
+//		}
+//		return reversed(curHead);
+//	}
+//
+//	ListNode* reversed(ListNode* head) {
+//		ListNode* curHead = head;
+//		ListNode* next = head->next;
+//		curHead->next = NULL;
+//		while (next != NULL) {
+//			ListNode* nextTemp = next->next;
+//			next->next = curHead;
+//			curHead = next;
+//			next = nextTemp;
+//		}
+//		return curHead;
+//	}
+//};
+
+//ListNode* reversed = new ListNode(1);
+//ListNode* cur = reversed;
+//for (int i = 2; i <= 10; i++) {
+//	ListNode* node = new ListNode(9);
+//	cur->next = node;
+//	cur = cur->next;
+//}
+//
+//Solution s;
+//ListNode* temp = s.plusOne(reversed);
+//while (temp != NULL) {
+//	cout << temp->val << endl;
+//	temp = temp->next;
+//}

@@ -14,9 +14,7 @@ public:
 		return v1[1] < v2[1];
 	}
 
-
-
-
+	void quickSort(int left, int right, vector<int>& arr);
 };
 
 struct missionscheduler_obj
