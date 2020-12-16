@@ -59,6 +59,10 @@ public:
 
 	//leetcode 1230
 	void probabilityOfHeads();
+
+	//lintcode 789
+	int backPackVII(int n, vector<int> &prices, vector<int> &weight, vector<int> &amounts);
+
 };
 
 
