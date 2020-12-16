@@ -44,5 +44,64 @@ void Bit_Solution::countTriplets()
 		}
 	}
 	cout << total;
+}
 
+long long Bit_Solution::getMaxValue(int s, vector<int> &v, vector<int> &c) {
+	int middle = v.size() / 2;
+	vector<pair<long long, long long>> tempv;
+	int middleNum = 1 << middle;
+	for (int i = 0; i < middleNum; i++) {
+		pair<long long, long long> temp = getCapacity(s, 0, v, c, i);
+		if (temp.first<=s)
+			tempv.push_back(temp);
+	}
+	sort(tempv.begin(), tempv.end(), [](pair<long long, long long>&a, pair<long long, long long>&b) {
+		return a.first < b.first;
+	});
+
+	vector<pair<long long, long long>> firstv;
+	int curWeight = tempv[0].second;
+	firstv.push_back(tempv[0]);
+	for (int i = 1; i < tempv.size(); i++) {
+		if (tempv[i].second <= curWeight) {
+			continue;		
+		}
+		firstv.push_back(tempv[i]);
+		curWeight = tempv[i].second;
+	}
+
+	long long maxValue = 0;
+	long long secondSize = v.size() - middle;
+	int secondNum = 1 << secondSize;
+	for (int i = 0; i < secondNum; i++) {
+		pair<long long, long long> secondValue = getCapacity(s, middle, v, c, i);
+		pair<long long, long long> tempValue = secondValue;
+		tempValue.first = (long long)s - tempValue.first;
+		vector<pair<long long, long long>>::iterator it=upper_bound(firstv.begin(),firstv.end(), tempValue
+			, [](pair<long long, long long>a, pair<long long, long long>b) {
+			return a.first < b.first;}
+		);
+		if (it != firstv.begin()) {
+			maxValue = max(maxValue, (*(--it)).second + secondValue.second);
+		}
+	}
+	return maxValue;
+
+}
+
+pair<long long, long long> Bit_Solution::getCapacity(int s, int start, vector<int> &v, vector<int> &c, int num) {
+	long long totalSize = 0;
+	long long totalWeight = 0;
+	
+	int offset = 0;
+	while (num != 0) {
+		if (num & 1) {
+			totalWeight+= v[start + offset];
+			totalSize += c[start + offset];
+		}
+		offset++;
+		num >>= 1;
+	}
+
+	return make_pair(totalSize, totalWeight);
 }
