@@ -72,7 +72,7 @@ bool GraphSolution::isCircled()
 //²¢²é¼¯
 int GraphSolution::findParent(int p, vector<int>& parent)
 {
-	if (parent[p] != p)
+	if (parent[p] != parent[parent[p]])
 		parent[p] = findParent(parent[p], parent);
 	return parent[p];
 }

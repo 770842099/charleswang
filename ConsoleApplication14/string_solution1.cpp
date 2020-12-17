@@ -30,6 +30,23 @@ void string_solution::run()
 	longestPalindrome();
 }
 
+//void test_string()
+//{
+//	string a("12345");
+//	string b("28888");
+//	
+//	cout << atoi(a.c_str())<<endl;
+//	cout << stoi(a)<<endl;
+//
+//	cout << (int)a.at(1) << endl;
+//	int k = 333;
+//	string c = std::to_string(k);
+//	//cout<< stoi(a.at(0))+ ctoi(b.at(0));
+//
+//	a.append("df");
+//	cout << a << endl;
+//}
+
 
 void string_solution::two_same_strings()
 {
